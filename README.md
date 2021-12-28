@@ -1,5 +1,9 @@
-# Google-img-scrap v1.0.0
+# Google-img-scrap v1.0.1
 Scrap images from google image with lot of options
+
+## Update
+
+- Added the missing dependencie
 
 ## Found a bug ?
 
