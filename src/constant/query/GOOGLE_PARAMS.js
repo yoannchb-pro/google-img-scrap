@@ -1,0 +1,9 @@
+const SIZE_PARAM = "isz",
+      COLOR_PARAM = "ic",
+      SPECIFIC_COLOR_PARAM = "Cisc",
+      TYPE_PARAM = "itp",
+      DATE_PARAM = "qdr",
+      LICENCE_PARAM = "il",
+      IMAGE_EXTENSION_PARAM = "ift";
+
+module.exports = { SIZE_PARAM, COLOR_PARAM, SPECIFIC_COLOR_PARAM, TYPE_PARAM, DATE_PARAM, LICENCE_PARAM, IMAGE_EXTENSION_PARAM };

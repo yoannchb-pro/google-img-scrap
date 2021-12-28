@@ -1,0 +1,40 @@
+{
+  "name": "google-img-scrap",
+  "version": "1.0.0",
+  "description": "Scrap images from google images with a lot of options",
+  "main": "./src/google-img-scrap.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoannchb-pro/google-img-scrap.git"
+  },
+  "keywords": [
+    "google",
+    "image",
+    "scrap",
+    "options",
+    "query",
+    "powerfull",
+    "easy",
+    "type",
+    "color",
+    "extension",
+    "filter",
+    "date",
+    "licence"
+  ],
+  "author": "yoannchb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoannchb-pro/google-img-scrap/issues"
+  },
+  "homepage": "https://github.com/yoannchb-pro/google-img-scrap#readme",
+  "dependencies": {
+    "got": "^11.0.0"
+  }
+}
