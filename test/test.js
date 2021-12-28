@@ -1,6 +1,6 @@
 const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
 
-console.log(GOOGLE_QUERY);
+// console.log(GOOGLE_QUERY);
 
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
@@ -13,10 +13,11 @@ console.log(GOOGLE_QUERY);
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
-        domains: [],
+        domains: ["alamy.com", "istockphoto.com", "vecteezy.com", "gstatic.com"],
+        excludeWords: ["black", "white"], //If you don't like black and white cats
         custom: "name=content&name2=content2",
         safeSearch: false,
-        excludeDomains: []
+        // excludeDomains: ["gstatic.com", "istockphoto.com", "alamy.com"]
     });
 
     console.log(test, test.result.length);

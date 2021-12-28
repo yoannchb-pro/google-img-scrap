@@ -10,6 +10,8 @@ const { buildQuery, unicodeToChar } = require('./utils/UTILS');
 
 //verify good configuration
 function verify(config){
+    if(config.excludeDomains && config.domains) throw "Can not set 'excludeDomains' and 'domains' as same times";
+
     if(!config.search || config.search.trim() == "") throw "'search' can not be empty";
 
     if(config.query){
@@ -77,16 +79,22 @@ async function GOOGLE_IMG_SCRAP(config = {}){
 
     //exclude domains
     const EXCLUDE_DOMAINS = [];
-    if(config.excludeDomains) config.excludeDomains.forEach((domain) => EXCLUDE_DOMAINS.push(`-site:${domain}`));
+    if(config.excludeDomains) config.excludeDomains.forEach((domain) => EXCLUDE_DOMAINS.push(`-site:"${domain}"`));
 
     //domains
     const DOMAINS = [];
     if(config.domains) config.domains.forEach((domain) => DOMAINS.push(`site:"${domain}"`));
 
+    //exclude words
+    const EXCLUDE_WORDS = [];
+    if(config.excludeWords) config.excludeWords.forEach((word) => EXCLUDE_WORDS.push(`-"${word}"`));
+
     //building url
+    const SEARCH_TERM = config.search + " " + EXCLUDE_WORDS.join(" ") + " " + EXCLUDE_DOMAINS.join(" ") + " " + DOMAINS.join(' OR ');
+    const SEARCH = encodeURIComponent(SEARCH_TERM.trim())
     const QUERY = Object.assign(GOOGLE_CONSTANT.forceGoogleImage, {
         [GOOGLE_CONSTANT.queryParam]: Object.values(config.query || {}).join(','),
-        q: encodeURIComponent(config.search + " " + EXCLUDE_DOMAINS.join(" ") + " " + DOMAINS.join(' OR ')),
+        q: SEARCH,
     });
 
     const CUSTOM_PARAM = config.custom ? `&${config.custom}` : "";

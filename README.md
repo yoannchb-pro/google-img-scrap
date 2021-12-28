@@ -1,9 +1,12 @@
-# Google-img-scrap v1.0.1
+# Google-img-scrap v1.0.2
 Scrap images from google image with lot of options
 
 ## Update
 
 - Added the missing dependencie
+- Cannot set 'domains' and 'excludeDomains' as same time
+- Fixed some bugs
+- New option ```excludeWords```
 
 ## Found a bug ?
 
@@ -17,21 +20,53 @@ npm i google-img-scrap
 
 ## Import
 
+- NPM
+
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
+const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
 ```
+
+- From GITHUB
+
+```js
+const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('./src/google-img-scrap');
+```
+
+## Params
+
+- "search" (String) what you want to search
+- "excludeWords" (Array of String) exclude some words from the search
+- "domains" (Array of String) filter by domains
+- "excludeDomains" (Array of String) exclude some domains
+- "safeSearch" (Boolean) active safe search or not for nsfw for example
+- "custom" (String) add extra query
+- "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items, you can see example behind)
 
 ## Result
 
 ```js
-[
+}
+{
+  url: 'https://images.google.com/search?tbm=isch&tbs=itp:clipart,qdr:y,ic:gray,isz:l,il:ol,ift:jpg&q=cats',
+  result: [
     {
-        url: "...",
-        width: 1920,
-        height: 1080
+      url: 'https://media.istockphoto.com/vectors/black-cats-set-vector-id599123506',
+      height: '806',
+      width: '1024'
+    },
+    {
+      url: 'https://media.istockphoto.com/vectors/cats-vector-id455327075',
+      height: '860',
+      width: '1024'
+    },
+    {
+      url: 'https://media.istockphoto.com/vectors/purring-cats-vector-silhouette-vector-id165749810?s=2048x2048',
+      height: '1895',
+      width: '2048'
     },
     ...
-]
+  ]
+}
 ```
 
 ## How to use ?
@@ -39,7 +74,9 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
 - For the query parameter you need to set the name in upper case !
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
+const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
+
+console.log(GOOGLE_QUERY);
 
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
@@ -52,10 +89,11 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
-        domains: [],
+        domains: ["alamy.com", "istockphoto.com", "vecteezy.com", "gstatic.com"],
+        excludeWords: ["black", "white"], //If you don't like black and white cats
         custom: "name=content&name2=content2",
         safeSearch: false,
-        excludeDomains: []
+        // excludeDomains: ["gstatic.com", "istockphoto.com", "alamy.com"]
     });
 
     console.log(test, test.result.length);
@@ -65,7 +103,7 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
 OR ALSO
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
+const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
 
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
@@ -75,14 +113,6 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
     console.log(test, test.result.length);
 })();
 ```
-## Params
-
-- "search" what you want to search
-- "domains" filter by domains
-- "excludeDomains" exclude some domains
-- "safeSearch" active safe search or not
-- "custom" add extra query
-- "query" set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION])
 
 ## Google query
 
