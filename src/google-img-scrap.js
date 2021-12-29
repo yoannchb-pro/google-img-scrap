@@ -105,8 +105,16 @@ async function GOOGLE_IMG_SCRAP(config = {}){
     //parsing
     const result = await parse(URL);
 
+    //excute function
+    let finalResult = [];
+    if(config.execute) result.forEach((element) => {
+        const value = config.execute(element);
+        if(value) finalResult.push(value);
+    });
+    else finalResult = result;
+
     //result
-    return {url: URL, result: result};
+    return {url: URL, result: finalResult};
 };
 
 module.exports = { GOOGLE_IMG_SCRAP , GOOGLE_QUERY };

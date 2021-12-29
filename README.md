@@ -1,12 +1,9 @@
-# Google-img-scrap v1.0.2
+# Google-img-scrap v1.0.3
 Scrap images from google image with lot of options
 
 ## Update
 
-- Added the missing dependencie
-- Cannot set 'domains' and 'excludeDomains' as same time
-- Fixed some bugs
-- New option ```excludeWords```
+- See [changelog](CHANGELOG.md)
 
 ## Found a bug ?
 
@@ -35,6 +32,7 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('./src/google-img-scrap');
 ## Params
 
 - "search" (String) what you want to search
+- "execute" (Function) allow you to execute a function to remove "gstatic.com" domains for example
 - "excludeWords" (Array of String) exclude some words from the search
 - "domains" (Array of String) filter by domains
 - "excludeDomains" (Array of String) exclude some domains
@@ -111,6 +109,28 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
     });
 
     console.log(test, test.result.length);
+})();
+```
+
+## Removing gstatic.com
+
+```js
+const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
+
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "demon slayer background hd",
+        query: {
+            SIZE: GOOGLE_QUERY.SIZE.LARGE,
+        },
+        domains: ["alphacoders.com"],
+        safeSearch: false,
+        execute: function(element){
+            if(!element.url.match('gstatic.com')) return element;
+        }
+    });
+
+    console.log(test, test.result[test.result.length-1].url, test.result.length);
 })();
 ```
 
