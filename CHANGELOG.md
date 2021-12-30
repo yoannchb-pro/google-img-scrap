@@ -1,5 +1,10 @@
 # Changelog
 
+### v1.0.4
+
+- New option ```urlMatch```. You know get image when an url match a string (example: "cdn")
+- New option ```filterByTitles```. Filter images by titles
+
 ### v1.0.3
 - New option ```execute```. allow you to execute a function to remove "gstatic.com" domains for example
 

@@ -89,8 +89,38 @@ async function GOOGLE_IMG_SCRAP(config = {}){
     const EXCLUDE_WORDS = [];
     if(config.excludeWords) config.excludeWords.forEach((word) => EXCLUDE_WORDS.push(`-"${word}"`));
 
+    //filter by titles
+    const FILTER_TITLE = [];
+    if(config.filterByTitles) config.filterByTitles.forEach((titleFilter) => {
+
+        const value = titleFilter.map((title) => {
+            return `intitle:"${title}"`;
+        });
+
+        FILTER_TITLE.push(`(${value.join(' AND ')})`);
+
+    });
+
+    //url match words
+    const URL_MATCH = [];
+    if(config.urlMatch) config.urlMatch.forEach((urlMatch) => {
+
+        const value = urlMatch.map((content) => {
+            return `inurl:${content}`;
+        });
+
+        URL_MATCH.push(`(${value.join(' AND ')})`);
+
+    });
+
     //building url
-    const SEARCH_TERM = config.search + " " + EXCLUDE_WORDS.join(" ") + " " + EXCLUDE_DOMAINS.join(" ") + " " + DOMAINS.join(' OR ');
+    const SEARCH_TERM = config.search + 
+    " " + URL_MATCH.join(" OR ") +
+    " " + FILTER_TITLE.join(" OR ") +
+    " " + EXCLUDE_WORDS.join(" ") + 
+    " " + EXCLUDE_DOMAINS.join(" ") + 
+    " " + DOMAINS.join(" OR ");
+
     const SEARCH = encodeURIComponent(SEARCH_TERM.trim())
     const QUERY = Object.assign(GOOGLE_CONSTANT.forceGoogleImage, {
         [GOOGLE_CONSTANT.queryParam]: Object.values(config.query || {}).join(','),

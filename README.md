@@ -1,5 +1,6 @@
-# Google-img-scrap v1.0.3
-Scrap images from google image with lot of options
+# Google-img-scrap v1.0.4
+
+Scrap images from google image with lot of tools and options.
 
 ## Update
 
@@ -38,7 +39,9 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('./src/google-img-scrap');
 - "excludeDomains" (Array of String) exclude some domains
 - "safeSearch" (Boolean) active safe search or not for nsfw for example
 - "custom" (String) add extra query
-- "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items, you can see example behind)
+- "urlMatch" (Array of Array) get image when an url match a string (example: "cdn") | ```example below```
+- "filterByTitles" (Array of Array) filter images by titles | ```example below```
+- "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | ```example below```
 
 ## Result
 
@@ -87,11 +90,11 @@ console.log(GOOGLE_QUERY);
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
-        domains: ["alamy.com", "istockphoto.com", "vecteezy.com", "gstatic.com"],
+        domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
         excludeWords: ["black", "white"], //If you don't like black and white cats
         custom: "name=content&name2=content2",
         safeSearch: false,
-        // excludeDomains: ["gstatic.com", "istockphoto.com", "alamy.com"]
+        // excludeDomains: ["istockphoto.com", "alamy.com"]
     });
 
     console.log(test, test.result.length);
@@ -131,6 +134,30 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
     });
 
     console.log(test, test.result[test.result.length-1].url, test.result.length);
+})();
+```
+
+## How urlMatch and filterByTitles work ?
+
+- urlMatch work like filterByTiles
+
+```js
+const { GOOGLE_IMG_SCRAP } = require('google-img-scrap');
+
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+        //will build something like this "(draw and white) or (albino and white)"
+        filterByTitles: [
+            ["draw", "white"],
+            ["albino", "white"]
+        ],
+        execute: function(element){
+            if(!element.url.match('gstatic.com')) return element;
+        }
+    });
+
+    console.log(test, test.result.length);
 })();
 ```
 
