@@ -1,6 +1,6 @@
 {
   "name": "google-img-scrap",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Scrap images from google images with a lot of options",
   "main": "./src/google-img-scrap.js",
   "types": "./types/index.d.ts",
@@ -30,6 +30,9 @@
     "licence"
   ],
   "author": "yoannchb",
+  "contributors": [
+    {"name":"christophe77","url":"https://github.com/christophe77"}
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yoannchb-pro/google-img-scrap/issues"

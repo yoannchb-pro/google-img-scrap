@@ -1,8 +1,11 @@
 # Changelog
 
+### 1.0.5
+- Added types (by christophe77)
+
 ### v1.0.4
 
-- New option ```urlMatch```. You know get image when an url match a string (example: "cdn")
+- New option ```urlMatch```. You now get image when an url match a string (example: "cdn")
 - New option ```filterByTitles```. Filter images by titles
 
 ### v1.0.3
