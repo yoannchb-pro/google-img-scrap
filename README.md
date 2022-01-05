@@ -1,4 +1,4 @@
-# Google-img-scrap v1.0.4
+# Google-img-scrap v1.0.5
 
 Scrap images from google image with lot of tools and options.
 
