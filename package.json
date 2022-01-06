@@ -31,7 +31,10 @@
   ],
   "author": "yoannchb",
   "contributors": [
-    {"name":"christophe77","url":"https://github.com/christophe77"}
+    {
+      "name": "christophe77",
+      "url": "https://github.com/christophe77"
+    }
   ],
   "license": "MIT",
   "bugs": {

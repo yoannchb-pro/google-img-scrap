@@ -13,7 +13,7 @@ type Config = {
   custom?: string;
   safeSearch?: boolean;
   excludeDomains?: string[];
-  execute?: (element: FinalResult) => FinalResult;
+  execute?: (element: FinalResult) => FinalResult | undefined;
   filterByTitles: [string[]];
 };
 type FinalResult = {
