@@ -1,4 +1,4 @@
-# Google-img-scrap v1.0.5
+# Google-img-scrap v1.0.6
 
 Scrap images from google image with lot of tools and options.
 
@@ -42,6 +42,7 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('./src/google-img-scrap');
 - "urlMatch" (Array of Array) get image when an url match a string (example: "cdn") | ```example below```
 - "filterByTitles" (Array of Array) filter images by titles | ```example below```
 - "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | ```example below```
+- "limit" (Int) to limit the size of the results
 
 ## Result
 
@@ -90,6 +91,7 @@ console.log(GOOGLE_QUERY);
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
+        limit: 5,
         domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
         excludeWords: ["black", "white"], //If you don't like black and white cats
         custom: "name=content&name2=content2",

@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.6
+- Fixed types
+- Added ```limit``` to limit the size of the results
+
 ### 1.0.5
 - Added types (by christophe77)
 

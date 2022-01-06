@@ -1,6 +1,6 @@
 {
   "name": "google-img-scrap",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Scrap images from google images with a lot of options",
   "main": "./src/google-img-scrap.js",
   "types": "./types/index.d.ts",
