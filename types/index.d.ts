@@ -14,7 +14,7 @@ type Config = {
   safeSearch?: boolean;
   excludeDomains?: string[];
   execute?: (element: FinalResult) => FinalResult | undefined;
-  filterByTitles: [string[]];
+  filterByTitles?: [string[]];
 };
 type FinalResult = {
   url: string;
