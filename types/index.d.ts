@@ -1,5 +1,6 @@
 type Config = {
   search: string;
+  limit?:number;
   query?: {
     TYPE?: string;
     DATE?: string;
