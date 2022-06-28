@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.7
+- Readme update
+
 ### 1.0.6
 - Fixed types
 - Added ```limit``` to limit the size of the results

@@ -13,7 +13,6 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('../src/google-img-scrap');
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
-        domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
         excludeWords: ["black", "white"], //If you don't like black and white cats
         custom: "name=content&name2=content2",
         safeSearch: false,

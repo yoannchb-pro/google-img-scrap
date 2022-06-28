@@ -1,6 +1,6 @@
-# Google-img-scrap v1.0.6
+# Google-img-scrap v1.0.7
 
-Scrap images from google image with lot of tools and options.
+Scrap images from google images with customs pre filled options
 
 ## Update
 
@@ -18,68 +18,93 @@ npm i google-img-scrap
 
 ## Import
 
-- NPM
-
 ```js
 const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
 ```
 
-- From GITHUB
-
-```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('./src/google-img-scrap');
-```
-
-## Params
+## Query Params
 
 - "search" (String) what you want to search
 - "execute" (Function) allow you to execute a function to remove "gstatic.com" domains for example
-- "excludeWords" (Array of String) exclude some words from the search
-- "domains" (Array of String) filter by domains
-- "excludeDomains" (Array of String) exclude some domains
+- "excludeWords" (String[]) exclude some words from the search
+- "domains" (String[]) filter by domains
+- "excludeDomains" (String[]) exclude some domains
 - "safeSearch" (Boolean) active safe search or not for nsfw for example
 - "custom" (String) add extra query
-- "urlMatch" (Array of Array) get image when an url match a string (example: "cdn") | ```example below```
-- "filterByTitles" (Array of Array) filter images by titles | ```example below```
+- "urlMatch" (String[][]) get image when an url match a string (example: "cdn") | ```example below```
+- "filterByTitles" (String[][]) filter images by titles | ```example below```
 - "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | ```example below```
 - "limit" (Int) to limit the size of the results
 
 ## Result
 
 ```js
-}
 {
-  url: 'https://images.google.com/search?tbm=isch&tbs=itp:clipart,qdr:y,ic:gray,isz:l,il:ol,ift:jpg&q=cats',
+  url: 'https://images.google.com/search?tbm=isch&tbs=itp:clipart,qdr:y,ic:gray,isz:l,il:ol,ift:jpg&q=cats%20%20%20-%22black%22%20-%22white%22&name=content&name2=content2',
   result: [
     {
-      url: 'https://media.istockphoto.com/vectors/black-cats-set-vector-id599123506',
-      height: '806',
+      url: 'https://media.gettyimages.com/vectors/cat-eating-fish-vector-id1216628506',
+      height: '1024',
       width: '1024'
     },
     {
-      url: 'https://media.istockphoto.com/vectors/cats-vector-id455327075',
-      height: '860',
+      url: 'https://www.ariatrade.gr/images/products/2021/10/110294_1.jpg',
+      height: '768',
       width: '1024'
     },
     {
-      url: 'https://media.istockphoto.com/vectors/purring-cats-vector-silhouette-vector-id165749810?s=2048x2048',
-      height: '1895',
+      url: 'https://media.gettyimages.com/illustrations/panther-leaping-illustration-id152406879?s=2048x2048',
+      height: '2048',
       width: '2048'
     },
-    ...
+    {
+      url: 'https://media.gettyimages.com/illustrations/botany-plants-antique-engraving-illustration-erythrina-variegata-illustration-id970781520',
+      height: '1024',
+      width: '828'
+    }
   ]
+  ...
 }
 ```
 
 ## How to use ?
 
-- For the query parameter you need to set the name in upper case !
+- **For the query parameter you need to set the name in upper case !**
+
+## Simple example
+
+Search cats images
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+    });
 
-console.log(GOOGLE_QUERY);
+    console.log(test);
+})();
+```
 
+## Removing gstatic.com
+
+```js
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "demon slayer background hd",
+        execute: function(element){
+            if(!element.url.match('gstatic.com')) return element;
+        }
+    });
+
+    console.log(test);
+})();
+```
+
+## Custom query
+
+All query options are optional (see below for all the options)
+
+```js
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
         search: "cats",
@@ -91,51 +116,91 @@ console.log(GOOGLE_QUERY);
             LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
             EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
         },
-        limit: 5,
-        domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
-        excludeWords: ["black", "white"], //If you don't like black and white cats
-        custom: "name=content&name2=content2",
-        safeSearch: false,
-        // excludeDomains: ["istockphoto.com", "alamy.com"]
     });
 
-    console.log(test, test.result.length);
+    console.log(test);
 })();
 ```
 
-OR ALSO
+## Limit result size
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
-
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
         search: "cats",
+        limit: 5,
+    });
+
+    console.log(test);
+})();
+```
+
+## Domains
+
+Only scrap from a specific domain
+
+```js
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+        domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
+    });
+
+    console.log(test);
+})();
+```
+
+## Exclude domains
+
+```js
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+        excludeDomains: ["istockphoto.com", "alamy.com"]
+    });
+
+    console.log(test);
+})();
+```
+
+## Exclude words
+
+If you don' like black cats and white cats
+
+```js
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+        excludeWords: ["black", "white"], //If you don't like black cats and white cats
     });
 
     console.log(test, test.result.length);
 })();
 ```
 
-## Removing gstatic.com
+## Safe search (no nsfw)
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
-
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
-        search: "demon slayer background hd",
-        query: {
-            SIZE: GOOGLE_QUERY.SIZE.LARGE,
-        },
-        domains: ["alphacoders.com"],
+        search: "cats",
         safeSearch: false,
-        execute: function(element){
-            if(!element.url.match('gstatic.com')) return element;
-        }
     });
 
-    console.log(test, test.result[test.result.length-1].url, test.result.length);
+    console.log(test);
+})();
+```
+
+## Custom query params
+
+```js
+(async function(){
+    const test = await GOOGLE_IMG_SCRAP({
+        search: "cats",
+        custom: "name=content&name2=content2",
+    });
+
+    console.log(test);
 })();
 ```
 
@@ -144,8 +209,6 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
 - urlMatch work like filterByTiles
 
 ```js
-const { GOOGLE_IMG_SCRAP } = require('google-img-scrap');
-
 (async function(){
     const test = await GOOGLE_IMG_SCRAP({
         search: "cats",
@@ -154,12 +217,9 @@ const { GOOGLE_IMG_SCRAP } = require('google-img-scrap');
             ["draw", "white"],
             ["albino", "white"]
         ],
-        execute: function(element){
-            if(!element.url.match('gstatic.com')) return element;
-        }
     });
 
-    console.log(test, test.result.length);
+    console.log(test);
 })();
 ```
 
