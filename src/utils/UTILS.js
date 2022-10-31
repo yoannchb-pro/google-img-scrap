@@ -5,7 +5,7 @@ function buildQuery(query, translator){
     const toTranslate = Object.keys(translator);
 
     for(const param of params){
-        const queryName = param;
+        let queryName = param;
         if(toTranslate.includes(param)) queryName = toTranslate[param];
 
         result.push(`${queryName}=${query[param]}`);
