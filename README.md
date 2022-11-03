@@ -1,6 +1,6 @@
-# Google-img-scrap v1.0.7
+# Google-img-scrap
 
-Scrap images from google images with customs pre filled options
+Scrap images from google images with customs pre filled dorking options
 
 ## Update
 
@@ -19,22 +19,22 @@ npm i google-img-scrap
 ## Import
 
 ```js
-const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
+const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("google-img-scrap");
 ```
 
 ## Query Params
 
-- "search" (String) what you want to search
-- "execute" (Function) allow you to execute a function to remove "gstatic.com" domains for example
-- "excludeWords" (String[]) exclude some words from the search
-- "domains" (String[]) filter by domains
-- "excludeDomains" (String[]) exclude some domains
-- "safeSearch" (Boolean) active safe search or not for nsfw for example
-- "custom" (String) add extra query
-- "urlMatch" (String[][]) get image when an url match a string (example: "cdn") | ```example below```
-- "filterByTitles" (String[][]) filter images by titles | ```example below```
-- "query" (Object) set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | ```example below```
-- "limit" (Int) to limit the size of the results
+- "search" `string` what you want to search
+- "execute" `(element: FinalResult) => FinalResult | undefined` allow you to execute a function to filter results
+- "excludeWords" `string[]` exclude some words from the search
+- "domains" `string[]` filter by domains
+- "excludeDomains" `string[]` exclude some domains
+- "safeSearch" `boolean` active safe search or not for nsfw for example
+- "custom" `string` add extra query
+- "urlMatch" `string[][]` get image when an url match a string (example: "cdn") | `example below`
+- "filterByTitles" `string[][]` filter images by titles | `example below`
+- "query" `GoogleQuery` set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | `example below`
+- "limit" `number` to limit the size of the results
 
 ## Result
 
@@ -43,60 +43,60 @@ const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
   url: 'https://images.google.com/search?tbm=isch&tbs=itp:clipart,qdr:y,ic:gray,isz:l,il:ol,ift:jpg&q=cats%20%20%20-%22black%22%20-%22white%22&name=content&name2=content2',
   result: [
     {
+      id: "HA6fW6faerBfPM",
+      title: "CAT eating a fish",
+      originalUrl: "https://media.gettyimages.com/vectors/cat-article.html",
       url: 'https://media.gettyimages.com/vectors/cat-eating-fish-vector-id1216628506',
-      height: '1024',
-      width: '1024'
+      averageColor: "rgb(241, 25, 60)",
+      averageColorObject: { r: 241, g: 25, b: 60},
+      height: 1024,
+      width: 1024
     },
     {
+      id: "OPSfyUtrsrYUI",
+      title: "Cat",
+      originalUrl: "https://www.ariatrade.gr/images/products/2021/10/article.html",
       url: 'https://www.ariatrade.gr/images/products/2021/10/110294_1.jpg',
-      height: '768',
-      width: '1024'
+      averageColor: "rgb(201, 250, 65)",
+      averageColorObject: { r: 201, g: 250, b: 65},
+      height: 768,
+      width: 1024
     },
-    {
-      url: 'https://media.gettyimages.com/illustrations/panther-leaping-illustration-id152406879?s=2048x2048',
-      height: '2048',
-      width: '2048'
-    },
-    {
-      url: 'https://media.gettyimages.com/illustrations/botany-plants-antique-engraving-illustration-erythrina-variegata-illustration-id970781520',
-      height: '1024',
-      width: '828'
-    }
+    ...
   ]
-  ...
 }
 ```
 
 ## How to use ?
 
-- **For the query parameter you need to set the name in upper case !**
+**NOTE**: For the query parameter you need to set the name in upper case !
 
 ## Simple example
 
 Search cats images
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
-## Removing gstatic.com
+## Filtering
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "demon slayer background hd",
-        execute: function(element){
-            if(!element.url.match('gstatic.com')) return element;
-        }
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "demon slayer background hd",
+    execute: function (element) {
+      if (element.url.length < 20) return element;
+    },
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
@@ -105,33 +105,33 @@ Search cats images
 All query options are optional (see below for all the options)
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        query: {
-            TYPE: GOOGLE_QUERY.TYPE.CLIPART,
-            DATE: GOOGLE_QUERY.DATE.YEAR,
-            COLOR: GOOGLE_QUERY.COLOR.BLACK_AND_WHITE,
-            SIZE: GOOGLE_QUERY.SIZE.LARGE,
-            LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
-            EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
-        },
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    query: {
+      TYPE: GOOGLE_QUERY.TYPE.CLIPART,
+      DATE: GOOGLE_QUERY.DATE.YEAR,
+      COLOR: GOOGLE_QUERY.COLOR.BLACK_AND_WHITE,
+      SIZE: GOOGLE_QUERY.SIZE.LARGE,
+      LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
+      EXTENSION: GOOGLE_QUERY.EXTENSION.JPG,
+    },
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
 ## Limit result size
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        limit: 5,
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    limit: 5,
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
@@ -140,26 +140,26 @@ All query options are optional (see below for all the options)
 Only scrap from a specific domain
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
 ## Exclude domains
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        excludeDomains: ["istockphoto.com", "alamy.com"]
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    excludeDomains: ["istockphoto.com", "alamy.com"],
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
@@ -168,39 +168,39 @@ Only scrap from a specific domain
 If you don' like black cats and white cats
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        excludeWords: ["black", "white"], //If you don't like black cats and white cats
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    excludeWords: ["black", "white"], //If you don't like black cats and white cats
+  });
 
-    console.log(test, test.result.length);
+  console.log(test);
 })();
 ```
 
 ## Safe search (no nsfw)
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        safeSearch: false,
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    safeSearch: false,
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
 ## Custom query params
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        custom: "name=content&name2=content2",
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    custom: "name=content&name2=content2",
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
@@ -209,17 +209,17 @@ If you don' like black cats and white cats
 - urlMatch work like filterByTiles
 
 ```js
-(async function(){
-    const test = await GOOGLE_IMG_SCRAP({
-        search: "cats",
-        //will build something like this "(draw and white) or (albino and white)"
-        filterByTitles: [
-            ["draw", "white"],
-            ["albino", "white"]
-        ],
-    });
+(async function () {
+  const test = await GOOGLE_IMG_SCRAP({
+    search: "cats",
+    //will build something like this "(draw and white) or (albino and white)"
+    filterByTitles: [
+      ["draw", "white"],
+      ["albino", "white"],
+    ],
+  });
 
-    console.log(test);
+  console.log(test);
 })();
 ```
 
@@ -227,10 +227,10 @@ If you don' like black cats and white cats
 
 ```js
 {
-  SIZE: { 
-    LARGE, 
-    MEDIUM, 
-    ICON 
+  SIZE: {
+    LARGE,
+    MEDIUM,
+    ICON
   },
   COLOR: {
     BLACK_AND_WHITE,
@@ -248,10 +248,10 @@ If you don' like black cats and white cats
     BLACK,
     BROWN
   },
-  TYPE: { 
-    CLIPART, 
-    DRAW, 
-    GIF 
+  TYPE: {
+    CLIPART,
+    DRAW,
+    GIF
   },
   EXTENSION: {
     JPG,
@@ -263,15 +263,15 @@ If you don' like black cats and white cats
     ICO,
     RAW
   },
-  DATE: { 
-    DAY, 
-    WEEK, 
-    MONTH, 
-    YEAR 
+  DATE: {
+    DAY,
+    WEEK,
+    MONTH,
+    YEAR
   },
-  LICENCE: { 
-    CREATIVE_COMMONS, 
-    COMMERCIAL_AND_OTHER 
+  LICENCE: {
+    CREATIVE_COMMONS,
+    COMMERCIAL_AND_OTHER
   }
 }
 ```

@@ -1,15 +1,15 @@
 const got = require("got");
 const { FastHTMLParser } = require("fast-html-dom-parser");
 
-const { GOOGLE_CONSTANT } = require("./constant/GOOGLE_CONSTANT");
-const { GOOGLE_QUERY } = require("./constant/query/GOOGLE_QUERY");
-const EXTENSIONS = require("./constant/extensions/IMAGES_EXTENSIONS.json");
+const { GOOGLE_CONSTANT } = require("../constant/GOOGLE_CONSTANT");
+const { GOOGLE_QUERY } = require("../constant/query/GOOGLE_QUERY");
+const EXTENSIONS = require("../constant/extensions/IMAGES_EXTENSIONS.json");
 
-const { buildQuery, unicodeToChar } = require("./utils/UTILS");
+const { buildQuery, unicodeToChar } = require("../utils/UTILS");
 
 /**
  * Validation of the arguments passed
- * @param {import("../types").Config} config
+ * @param {import("../../types").Config} config
  */
 function verify(config) {
   if (config.excludeDomains && config.domains)
@@ -44,7 +44,7 @@ function containImage(content = "") {
 /**
  *Parse the html from google image to get the images links
  * @param {string} url
- * @returns {import("../types").FinalResult[]}
+ * @returns {import("../../types").FinalResult[]}
  */
 async function parse(url) {
   const result = [];
@@ -64,45 +64,17 @@ async function parse(url) {
     const valide = containImage(body);
 
     if (valide) {
-      //getting image url, height, width, average
-      const regex =
-        /\["(http[^"]+?)",(\d+),(\d+)\],[\w\d]+?,[\w\d]+?,"rgb\((\d+),(\d+),(\d+)\)"/gi;
-
-      //getting originalUrl, title, id
-      const secondRegex = /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
+      const regex = /\["(http.+?)",(\d+),(\d+)\]/gi;
 
       let res = null;
-      let secondRes = null;
 
-      while (
-        (res = regex.exec(body)) != null &&
-        (secondRes = secondRegex.exec(body)) != null
-      ) {
-        if (
-          res.length >= 4 &&
-          res[1].match(/http/gi).length < 2 &&
-          secondRes.length === 4 &&
-          secondRes[2].match(/http/gi).length < 2
-        ) {
-          const [r, g, b] = [res[4], res[5], res[6]].map((e) =>
-            parseInt(e, 10)
-          );
-
+      while ((res = regex.exec(body)) != null) {
+        if (res.length >= 4 && res[1].match(/http/gi).length < 2)
           result.push({
-            id: secondRes[1],
-            title: secondRes[3],
             url: unicodeToChar(res[1]),
-            originalUrl: unicodeToChar(secondRes[2]),
-            averageColor: `rgb(${r}, ${g}, ${b})`,
-            averageColorObject: {
-              r,
-              g,
-              b,
-            },
-            height: parseInt(res[2], 10),
-            width: parseInt(res[3], 10),
+            height: res[2],
+            width: res[3],
           });
-        }
       }
     }
   }
@@ -112,8 +84,8 @@ async function parse(url) {
 
 /**
  * Main function to build google image dork URL
- * @param {import("../types").Config} config
- * @returns {import("../types").Results}
+ * @param {import("../../types").Config} config
+ * @returns {import("../../types").Results}
  */
 async function GOOGLE_IMG_SCRAP(config = {}) {
   verify(config);

@@ -1,7 +1,7 @@
 {
   "name": "google-img-scrap",
-  "version": "1.0.7",
-  "description": "Scrap images from google images with customs pre filled options",
+  "version": "1.0.8",
+  "description": "Scrap images from google images with customs pre filled dorking options",
   "main": "./src/google-img-scrap.js",
   "types": "./types/index.d.ts",
   "directories": {
@@ -34,6 +34,10 @@
     {
       "name": "christophe77",
       "url": "https://github.com/christophe77"
+    },
+    {
+      "name": "GaspardCulis",
+      "url": "https://github.com/GaspardCulis"
     }
   ],
   "license": "MIT",

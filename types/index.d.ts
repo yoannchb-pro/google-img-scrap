@@ -1,6 +1,6 @@
 type Config = {
   search: string;
-  limit?:number;
+  limit?: number;
   query?: {
     TYPE?: string;
     DATE?: string;
@@ -17,15 +17,27 @@ type Config = {
   execute?: (element: FinalResult) => FinalResult | undefined;
   filterByTitles?: [string[]];
 };
+
 type FinalResult = {
+  id: string;
+  title: string;
+  originalUrl: string;
   url: string;
-  height: string;
-  width: string;
+  averageColor: string;
+  averageColorObject: {
+    r: number;
+    g: number;
+    b: number;
+  };
+  height: number;
+  width: number;
 };
+
 type Results = {
   url: string;
   result: FinalResult[];
 };
+
 type GoogleQuery = {
   SIZE: {
     LARGE: string;
