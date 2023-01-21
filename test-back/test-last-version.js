@@ -1,4 +1,4 @@
-const { GOOGLE_IMG_SCRAP } = require("../src/google-img-scrap");
+const { GOOGLE_IMG_SCRAP } = require("../src");
 const V107 = require("../src/back/google-img-scrap-1.0.7-.js");
 
 // console.log(GOOGLE_QUERY);

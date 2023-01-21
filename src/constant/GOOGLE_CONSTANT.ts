@@ -10,4 +10,4 @@ const GOOGLE_CONSTANT = {
   },
 };
 
-module.exports = { GOOGLE_CONSTANT };
+export default GOOGLE_CONSTANT;

@@ -13,4 +13,4 @@ const COLORS = [
   "brown",
 ];
 
-module.exports = { COLORS };
+export default COLORS;

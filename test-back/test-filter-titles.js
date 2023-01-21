@@ -1,4 +1,4 @@
-const { GOOGLE_IMG_SCRAP } = require("../src/google-img-scrap");
+const { GOOGLE_IMG_SCRAP } = require("../dist");
 
 (async function () {
   const test = await GOOGLE_IMG_SCRAP({
@@ -7,9 +7,6 @@ const { GOOGLE_IMG_SCRAP } = require("../src/google-img-scrap");
       ["draw", "white"],
       ["albino", "white"],
     ],
-    execute: function (element) {
-      if (!element.url.match("gstatic.com")) return element;
-    },
   });
 
   console.log(test, test.result.length);

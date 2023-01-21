@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.0.9
+
+- Fixed many bugs
+- `filterByTitles` is now working
+- `urlMatch` added in types
+- All the code have been write back in typescript with a new structure
+- Removed `execute`
+
 ### 1.0.8
 
 - Fixed "ERROR: Cannot assign to "queryName" because it is a constant" (by GaspardCulis)

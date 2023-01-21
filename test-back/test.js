@@ -1,4 +1,4 @@
-const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("../src/google-img-scrap");
+const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("../dist/index.js");
 
 // console.log(GOOGLE_QUERY);
 
@@ -16,9 +16,7 @@ const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("../src/google-img-scrap");
     excludeWords: ["black", "white"], //If you don't like black and white cats
     custom: "name=content&name2=content2",
     safeSearch: false,
-    execute: function (element) {
-      if (!element.url.match("gstatic.com")) return element;
-    },
+
     // excludeDomains: ["istockphoto.com", "alamy.com"]
   });
 

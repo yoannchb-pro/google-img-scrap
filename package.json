@@ -1,14 +1,15 @@
 {
   "name": "google-img-scrap",
-  "version": "1.0.8",
-  "description": "Scrap images from google images with customs pre filled dorking options",
-  "main": "./src/google-img-scrap.js",
-  "types": "./types/index.d.ts",
+  "version": "1.0.9",
+  "description": "Scrap images from google images with customs pre filled google dork options",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "node ./test/test.js"
+    "build": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -46,7 +47,15 @@
   },
   "homepage": "https://github.com/yoannchb-pro/google-img-scrap#readme",
   "dependencies": {
-    "fast-html-dom-parser": "^1.0.5",
-    "got": "^11.0.0"
+    "axios": "^1.2.3",
+    "fast-html-dom-parser": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.6",
+    "@types/node": "^18.11.18",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
   }
 }
