@@ -20,12 +20,14 @@ npm i google-img-scrap
 
 ```js
 const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("google-img-scrap");
+// OR
+import { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } from "google-img-scrap";
 ```
 
-## Query Params
+## Options definition
 
 - "search" `string` what you want to search
-- "execute" `(element: FinalResult) => FinalResult | undefined` allow you to execute a function to filter results
+- "proxy" `AxiosProxyConfig` configure a proxy with axios proxy
 - "excludeWords" `string[]` exclude some words from the search
 - "domains" `string[]` filter by domains
 - "excludeDomains" `string[]` exclude some domains
@@ -40,27 +42,35 @@ const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("google-img-scrap");
 
 ```js
 {
-  url: 'https://images.google.com/search?tbm=isch&tbs=itp:clipart,qdr:y,ic:gray,isz:l,il:ol,ift:jpg&q=cats%20%20%20-%22black%22%20-%22white%22&name=content&name2=content2',
+  url: 'https://images.google.com/search?tbm=isch&tbs=&q=cats',
   result: [
     {
-      id: "HA6fW6faerBfPM",
-      title: "CAT eating a fish",
-      originalUrl: "https://media.gettyimages.com/vectors/cat-article.html",
-      url: 'https://media.gettyimages.com/vectors/cat-eating-fish-vector-id1216628506',
-      averageColor: "rgb(241, 25, 60)",
-      averageColorObject: { r: 241, g: 25, b: 60},
-      height: 1024,
-      width: 1024
+      id: 'K6Qd9XWnQFQCoM',
+      title: 'Domestic cat',
+      url: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x1.jpg',
+      originalUrl: 'https://www.nationalgeographic.com/animals/mammals/facts/domestic-cat',
+      averageColor: 'rgb(208, 189, 170)',
+      averageColorObject: {
+        r: 208,
+        g: 189,
+        b: 170
+      },
+      height: 1536,
+      width: 3072
     },
     {
-      id: "OPSfyUtrsrYUI",
-      title: "Cat",
-      originalUrl: "https://www.ariatrade.gr/images/products/2021/10/article.html",
-      url: 'https://www.ariatrade.gr/images/products/2021/10/110294_1.jpg',
-      averageColor: "rgb(201, 250, 65)",
-      averageColorObject: { r: 201, g: 250, b: 65},
-      height: 768,
-      width: 1024
+      id: 'HkevFQZ5DYu7oM',
+      title: 'Cat - Wikipedia',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg',
+      originalUrl: 'https://en.wikipedia.org/wiki/Cat',
+      averageColor: 'rgb(128, 115, 96)',
+      averageColorObject: {
+        r: 128,
+        g: 115,
+        b: 96
+      },
+      height: 2226,
+      width: 3640
     },
     ...
   ]
@@ -69,70 +79,62 @@ const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require("google-img-scrap");
 
 ## How to use ?
 
-**NOTE**: For the query parameter you need to set the name in upper case !
-
 ## Simple example
 
 Search cats images
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+});
 
-  console.log(test);
-})();
-```
-
-## Filtering
-
-```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "demon slayer background hd",
-    execute: function (element) {
-      if (element.url.length < 20) return element;
-    },
-  });
-
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Custom query
 
-All query options are optional (see below for all the options)
+All query options are optional (see below for all the options) and need to be in uppercase. You can combine as much as you want.
+Find all possible query options below.
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    query: {
-      TYPE: GOOGLE_QUERY.TYPE.CLIPART,
-      DATE: GOOGLE_QUERY.DATE.YEAR,
-      COLOR: GOOGLE_QUERY.COLOR.BLACK_AND_WHITE,
-      SIZE: GOOGLE_QUERY.SIZE.LARGE,
-      LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
-      EXTENSION: GOOGLE_QUERY.EXTENSION.JPG,
-    },
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  query: {
+    TYPE: GOOGLE_QUERY.TYPE.CLIPART,
+    LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
+    EXTENSION: GOOGLE_QUERY.EXTENSION.JPG,
+  },
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Limit result size
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    limit: 5,
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  limit: 5,
+});
 
-  console.log(test);
-})();
+console.log(test);
+```
+
+## Proxy
+
+See axios documentation to setup the proxy
+
+```js
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  proxy: {
+    protocol: "https",
+    host: "example.com",
+    port: 8080,
+  },
+});
+
+console.log(test);
 ```
 
 ## Domains
@@ -140,27 +142,23 @@ All query options are optional (see below for all the options)
 Only scrap from a specific domain
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Exclude domains
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    excludeDomains: ["istockphoto.com", "alamy.com"],
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  excludeDomains: ["istockphoto.com", "alamy.com"],
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Exclude words
@@ -168,59 +166,54 @@ Only scrap from a specific domain
 If you don' like black cats and white cats
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    excludeWords: ["black", "white"], //If you don't like black cats and white cats
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  excludeWords: ["black", "white"], //If you don't like black cats and white cats
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Safe search (no nsfw)
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    safeSearch: false,
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  safeSearch: false,
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Custom query params
 
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    custom: "name=content&name2=content2",
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  custom: "name=content&name2=content2",
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## How urlMatch and filterByTitles work ?
 
-- urlMatch work like filterByTiles
-
 ```js
-(async function () {
-  const test = await GOOGLE_IMG_SCRAP({
-    search: "cats",
-    //will build something like this "(draw and white) or (albino and white)"
-    filterByTitles: [
-      ["draw", "white"],
-      ["albino", "white"],
-    ],
-  });
+const test = await GOOGLE_IMG_SCRAP({
+  search: "cats",
+  //will build something like this "(draw and white) or (albino and white)"
+  filterByTitles: [
+    ["draw", "white"],
+    ["albino", "white"],
+  ],
+  //will build something like this "(cdn and wikipedia) or (cdn istockphoto)"
+  urlMatch: [
+    ["cdn", "wikipedia"],
+    ["cdn", "istockphoto"],
+  ],
+});
 
-  console.log(test);
-})();
+console.log(test);
 ```
 
 ## Google query
