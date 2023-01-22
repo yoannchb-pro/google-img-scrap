@@ -7,6 +7,8 @@
 - `urlMatch` added in types
 - All the code have been write back in typescript with a new structure
 - Removed `execute`
+- Added `proxy` configuration
+- Writed back all test with jest
 
 ### 1.0.8
 

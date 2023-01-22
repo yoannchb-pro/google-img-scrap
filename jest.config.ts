@@ -5,7 +5,6 @@ const config: Config.InitialOptions = {
   rootDir: "test",
   testEnvironment: "node",
   verbose: true,
-  automock: true,
 };
 
 export default config;

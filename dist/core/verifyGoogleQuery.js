@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const GOOGLE_QUERY_1 = require("../constant/query/GOOGLE_QUERY");
+const GOOGLE_QUERY_1 = __importDefault(require("../constant/query/GOOGLE_QUERY"));
 /**
  * Validation of the query passed as argument
  * @param config

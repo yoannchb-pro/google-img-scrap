@@ -1,5 +1,8 @@
+import { AxiosProxyConfig } from "axios";
+
 type Config = {
   search: string;
+  proxy?: AxiosProxyConfig;
   limit?: number;
   query?: {
     TYPE?: string;

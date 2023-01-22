@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES6",
     "noImplicitAny": true,
@@ -8,9 +9,9 @@
     "sourceMap": true,
     "outDir": "dist",
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": ["node", "jest"],
     "declaration": true,
-    "typeRoots": ["types"]
+    "typeRoots": ["types", "node_modules/@types"]
   },
   "include": ["src/**/*", "types/**/*"]
 }

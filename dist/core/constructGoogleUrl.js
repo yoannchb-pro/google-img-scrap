@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const GOOGLE_CONSTANT_1 = require("../constant/GOOGLE_CONSTANT");
+const GOOGLE_CONSTANT_1 = __importDefault(require("../constant/GOOGLE_CONSTANT"));
 const utils_1 = require("../utils/utils");
-const buildGoogleDork_1 = require("./buildGoogleDork");
+const buildGoogleDork_1 = __importDefault(require("./buildGoogleDork"));
 /**
  * Construct google url for scrapping
  * @param config

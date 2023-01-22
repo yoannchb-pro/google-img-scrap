@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isImage = exports.unicodeToChar = exports.buildQuery = void 0;
-const IMAGES_EXTENSIONS_json_1 = require("../constant/extensions/IMAGES_EXTENSIONS.json");
+const IMAGES_EXTENSIONS_json_1 = __importDefault(require("../constant/extensions/IMAGES_EXTENSIONS.json"));
 /**
  * Build the query for url
  * @param query

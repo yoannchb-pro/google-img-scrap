@@ -1,68 +1,106 @@
 import { isImage } from "../utils/utils";
 import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
-import axios from "axios";
+import axios, { AxiosProxyConfig } from "axios";
 import ImageResultItem from "../../types/imageResultItem";
 
 const { FastHTMLParser } = require("fast-html-dom-parser");
+
+/**
+ * Scrap google images scripts tag
+ * @param url
+ * @returns
+ */
+async function scrapGoogleImagesScriptsTag(
+  url: string,
+  proxy?: AxiosProxyConfig
+) {
+  const { data } = await axios(url, {
+    headers: GOOGLE_CONSTANT.headers,
+    ...(proxy ?? {}),
+  });
+
+  const parser = new FastHTMLParser(data);
+  const scripts = parser.getElementsByTagName("script");
+
+  return scripts;
+}
+
+function getGoogleImageObject(
+  informationsMatch: RegExpExecArray,
+  otherInformationsMatch: RegExpExecArray
+) {
+  const [r, g, b] = [
+    informationsMatch[4],
+    informationsMatch[5],
+    informationsMatch[6],
+  ].map((e) => parseInt(e, 10));
+
+  return {
+    id: otherInformationsMatch[1],
+    title: otherInformationsMatch[3],
+    url: informationsMatch[1],
+    originalUrl: otherInformationsMatch[2],
+    averageColor: `rgb(${r}, ${g}, ${b})`,
+    averageColorObject: {
+      r,
+      g,
+      b,
+    },
+    height: parseInt(informationsMatch[2], 10),
+    width: parseInt(informationsMatch[3], 10),
+  };
+}
 
 /**
  * Parse the html from google image to get the images links
  * @param url
  * @returns
  */
-async function parseGoogleImages(url: string): Promise<ImageResultItem[]> {
-  const { data } = await axios(url, {
-    headers: GOOGLE_CONSTANT.headers,
-  });
-  const parser = new FastHTMLParser(data);
-  const scripts = parser.getElementsByTagName("script");
-
+async function parseGoogleImages(
+  url: string,
+  proxy?: AxiosProxyConfig
+): Promise<ImageResultItem[]> {
   const result: ImageResultItem[] = [];
+
+  const scripts = await scrapGoogleImagesScriptsTag(url, proxy);
 
   if (!scripts) return result;
 
   for (const script of scripts) {
     const body = script.innerHTML;
 
+    // if we dont find any image extension we can skip
     if (!isImage(body)) continue;
 
-    //getting image url, height, width, average
-    const regex =
+    //getting image url, height, width, color average
+    const informationsRegex =
       /\["(http[^"]+?)",(\d+),(\d+)\],[\w\d]+?,[\w\d]+?,"rgb\((\d+),(\d+),(\d+)\)"/gi;
     //getting originalUrl, title, id
-    const secondRegex = /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
+    const otherInformationsRegex =
+      /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
 
-    let res = null;
-    let secondRes = null;
+    let informationsMatch: RegExpExecArray,
+      otherInformationsMatch: RegExpExecArray;
 
     while (
-      (res = regex.exec(body)) != null &&
-      (secondRes = secondRegex.exec(body)) != null
+      (informationsMatch = informationsRegex.exec(body)) !== null &&
+      (otherInformationsMatch = otherInformationsRegex.exec(body)) !== null
     ) {
+      if (informationsMatch.length < 4 || otherInformationsMatch.length < 4)
+        continue;
       if (
-        res.length >= 4 &&
-        res[1].match(/http/gi).length < 2 &&
-        secondRes.length === 4 &&
-        secondRes[2].match(/http/gi).length < 2
-      ) {
-        const [r, g, b] = [res[4], res[5], res[6]].map((e) => parseInt(e, 10));
+        informationsMatch[1].match(/http/gi).length > 2 ||
+        otherInformationsMatch[2].match(/http/gi).length > 2
+      )
+        continue;
 
-        result.push({
-          id: secondRes[1],
-          title: secondRes[3],
-          url: res[1],
-          originalUrl: secondRes[2],
-          averageColor: `rgb(${r}, ${g}, ${b})`,
-          averageColorObject: {
-            r,
-            g,
-            b,
-          },
-          height: parseInt(res[2], 10),
-          width: parseInt(res[3], 10),
-        });
-      }
+      result.push(
+        getGoogleImageObject(informationsMatch, otherInformationsMatch)
+      );
     }
+
+    //if we get the correct scripts with all images we can exit
+    if (result.length > 0) return result;
   }
 
   return result;

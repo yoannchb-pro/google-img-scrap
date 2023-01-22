@@ -4,10 +4,8 @@
   "description": "Scrap images from google images with customs pre filled google dork options",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
+    "example": "node ./example/index.js",
     "build": "tsc",
     "test": "jest"
   },

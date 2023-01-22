@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const GOOGLE_PARAMS_1 = require("./GOOGLE_PARAMS");
-const GOOGLE_COLORS_1 = require("./GOOGLE_COLORS");
-const IMAGES_EXTENSIONS_json_1 = require("../extensions/IMAGES_EXTENSIONS.json");
+const GOOGLE_PARAMS_1 = __importDefault(require("./GOOGLE_PARAMS"));
+const GOOGLE_COLORS_1 = __importDefault(require("./GOOGLE_COLORS"));
+const IMAGES_EXTENSIONS_json_1 = __importDefault(require("../extensions/IMAGES_EXTENSIONS.json"));
 const GOOGLE_QUERY = {
     SIZE: {
         LARGE: GOOGLE_PARAMS_1.default.SIZE + ":l",
