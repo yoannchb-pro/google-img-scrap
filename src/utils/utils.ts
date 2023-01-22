@@ -18,7 +18,7 @@ function buildQuery(query: Record<string, string>) {
 }
 
 /**
- * Transform unicode to char for more visibility
+ * Transform unicode to char for more visibility and fix invaldie url
  * @param text
  * @returns
  */
