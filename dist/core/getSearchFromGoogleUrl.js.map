@@ -1,0 +1,1 @@
+{"version":3,"file":"getSearchFromGoogleUrl.js","sourceRoot":"","sources":["../../src/core/getSearchFromGoogleUrl.ts"],"names":[],"mappings":";;AAAA;;;;GAIG;AACH,SAAS,sBAAsB,CAAC,GAAW;IACzC,MAAM,MAAM,GAAG,qBAAqB,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC;IACvE,OAAO,kBAAkB,CAAC,MAAM,CAAC,CAAC;AACpC,CAAC;AAED,kBAAe,sBAAsB,CAAC"}

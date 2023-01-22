@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.0
+
+- Added google image inverse search engine. You can now search images with a local image or with an image url.
+
 ### 1.0.9
 
 - Fixed many bugs

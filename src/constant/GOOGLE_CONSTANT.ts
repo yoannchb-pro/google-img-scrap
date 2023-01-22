@@ -1,5 +1,10 @@
 const GOOGLE_CONSTANT = {
   url: "https://images.google.com/search",
+  inverse: {
+    base: "https://lens.google.com/",
+    upload: "https://lens.google.com/upload",
+    url: "https://lens.google.com/uploadbyurl?url=",
+  },
   queryParam: "tbs",
   forceGoogleImage: {
     tbm: "isch", //needed to search on google image instead of google

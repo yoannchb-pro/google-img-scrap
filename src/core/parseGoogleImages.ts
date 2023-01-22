@@ -1,4 +1,4 @@
-import { isImage } from "../utils/utils";
+import { isImage, unicodeToChar } from "../utils/utils";
 import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
 import axios, { AxiosProxyConfig } from "axios";
 import ImageResultItem from "../../types/imageResultItem";
@@ -38,7 +38,7 @@ function getGoogleImageObject(
   return {
     id: otherInformationsMatch[1],
     title: otherInformationsMatch[3],
-    url: informationsMatch[1],
+    url: unicodeToChar(informationsMatch[1]),
     originalUrl: otherInformationsMatch[2],
     averageColor: `rgb(${r}, ${g}, ${b})`,
     averageColorObject: {

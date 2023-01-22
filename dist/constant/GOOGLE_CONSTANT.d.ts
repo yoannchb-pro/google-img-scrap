@@ -1,5 +1,10 @@
 declare const GOOGLE_CONSTANT: {
     url: string;
+    inverse: {
+        base: string;
+        upload: string;
+        url: string;
+    };
     queryParam: string;
     forceGoogleImage: {
         tbm: string;

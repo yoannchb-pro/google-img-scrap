@@ -38,7 +38,7 @@ function getGoogleImageObject(informationsMatch, otherInformationsMatch) {
     return {
         id: otherInformationsMatch[1],
         title: otherInformationsMatch[3],
-        url: informationsMatch[1],
+        url: (0, utils_1.unicodeToChar)(informationsMatch[1]),
         originalUrl: otherInformationsMatch[2],
         averageColor: `rgb(${r}, ${g}, ${b})`,
         averageColorObject: {
