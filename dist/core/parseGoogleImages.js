@@ -29,6 +29,12 @@ function scrapGoogleImagesScriptsTag(url, proxy) {
         return scripts;
     });
 }
+/**
+ * Construct the final object image from regex match with all informations
+ * @param informationsMatch
+ * @param otherInformationsMatch
+ * @returns
+ */
 function getGoogleImageObject(informationsMatch, otherInformationsMatch) {
     const [r, g, b] = [
         informationsMatch[4],
