@@ -1,7 +1,7 @@
 import { isImage, unicodeToChar } from "../utils/utils";
 import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
 import axios, { AxiosProxyConfig } from "axios";
-import ImageResultItem from "../../types/imageResultItem";
+import ImageResultItem from "../types/imageResultItem";
 
 const { FastHTMLParser } = require("fast-html-dom-parser");
 

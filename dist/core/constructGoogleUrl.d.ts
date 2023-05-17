@@ -1,4 +1,4 @@
-import Config from "../../types/config";
+import Config from "../types/config";
 /**
  * Construct google url for scrapping
  * @param config

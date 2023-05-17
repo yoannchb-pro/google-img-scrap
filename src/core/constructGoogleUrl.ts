@@ -1,4 +1,4 @@
-import Config from "../../types/config";
+import Config from "../types/config";
 import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
 import { buildQuery } from "../utils/utils";
 import buildGoogleDorks from "./buildGoogleDork";

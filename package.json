@@ -1,6 +1,6 @@
 {
   "name": "google-img-scrap",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Scrap images from google images with customs pre filled google dork options",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,6 +9,13 @@
     "build": "tsc",
     "test": "jest --colors"
   },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md",
+    "tsconfig.json",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yoannchb-pro/google-img-scrap.git"

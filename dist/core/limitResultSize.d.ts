@@ -1,4 +1,4 @@
-import ImageResultItem from "../../types/imageResultItem";
+import ImageResultItem from "../types/imageResultItem";
 /**
  * Limit the result size
  * @param config

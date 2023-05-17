@@ -1,4 +1,4 @@
-import Config from "../../types/config";
+import Config from "../types/config";
 /**
  * Build google dork string based on the config query
  * @param config

@@ -1,7 +1,7 @@
 import GOOGLE_PARAMS from "./GOOGLE_PARAMS";
 import COLORS from "./GOOGLE_COLORS";
 import EXTENSIONS from "../extensions/IMAGES_EXTENSIONS.json";
-import GoogleQuery from "../../../types/googleQuery";
+import GoogleQuery from "../../types/googleQuery";
 
 const GOOGLE_QUERY = {
   SIZE: {

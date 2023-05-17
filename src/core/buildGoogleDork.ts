@@ -1,4 +1,4 @@
-import Config from "../../types/config";
+import Config from "../types/config";
 
 /**
  * Show only images with a particular title

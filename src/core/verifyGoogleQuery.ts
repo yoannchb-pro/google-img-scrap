@@ -1,5 +1,5 @@
-import Config from "../../types/config";
-import GoogleQuery from "../../types/googleQuery";
+import Config from "../types/config";
+import GoogleQuery from "../types/googleQuery";
 import GOOGLE_QUERY from "../constant/query/GOOGLE_QUERY";
 
 /**

@@ -5,8 +5,8 @@ import verifyGoogleQuery from "./core/verifyGoogleQuery";
 import constructGoogleUrl from "./core/constructGoogleUrl";
 import limitResultSize from "./core/limitResultSize";
 
-import Config from "../types/config";
-import Results from "../types/results";
+import Config from "./types/config";
+import Results from "./types/results";
 
 import GOOGLE_QUERY from "./constant/query/GOOGLE_QUERY";
 import GOOGLE_CONSTANT from "./constant/GOOGLE_CONSTANT";

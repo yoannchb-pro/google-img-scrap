@@ -1,5 +1,5 @@
 const GOOGLE_CONSTANT = {
-  url: "https://images.google.com/search",
+  url: "https://www.google.com/search",
   inverse: {
     base: "https://lens.google.com/",
     upload: "https://lens.google.com/upload",
@@ -11,7 +11,7 @@ const GOOGLE_CONSTANT = {
   },
   headers: {
     "User-Agent":
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
   },
 };
 

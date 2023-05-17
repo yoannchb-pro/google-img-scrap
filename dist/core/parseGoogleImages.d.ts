@@ -1,5 +1,5 @@
 import { AxiosProxyConfig } from "axios";
-import ImageResultItem from "../../types/imageResultItem";
+import ImageResultItem from "../types/imageResultItem";
 /**
  * Parse the html from google image to get the images links
  * @param url

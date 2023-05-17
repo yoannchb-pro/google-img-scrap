@@ -1,6 +1,6 @@
 /// <reference types="node" />
-import Config from "../types/config";
-import Results from "../types/results";
+import Config from "./types/config";
+import Results from "./types/results";
 import GOOGLE_QUERY from "./constant/query/GOOGLE_QUERY";
 /**
  * Inverse google image search engine with image buffer

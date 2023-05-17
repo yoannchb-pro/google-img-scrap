@@ -1,4 +1,4 @@
-import Config from "../../types/config";
+import Config from "../types/config";
 /**
  * Validation of the query passed as argument
  * @param config
