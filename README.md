@@ -60,12 +60,6 @@ import {
       title: 'Domestic cat',
       url: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_2x1.jpg',
       originalUrl: 'https://www.nationalgeographic.com/animals/mammals/facts/domestic-cat',
-      averageColor: 'rgb(208, 189, 170)',
-      averageColorObject: {
-        r: 208,
-        g: 189,
-        b: 170
-      },
       height: 1536,
       width: 3072
     },
@@ -74,12 +68,6 @@ import {
       title: 'Cat - Wikipedia',
       url: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg',
       originalUrl: 'https://en.wikipedia.org/wiki/Cat',
-      averageColor: 'rgb(128, 115, 96)',
-      averageColorObject: {
-        r: 128,
-        g: 115,
-        b: 96
-      },
       height: 2226,
       width: 3640
     },
