@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.3
+
+- Some fixes
+
+### 1.1.2
+
+- Fixed empty result
+- Removed average color
+
 ### 1.1.1
 
 - Fixed empty result
