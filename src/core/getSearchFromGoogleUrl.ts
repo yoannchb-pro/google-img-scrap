@@ -4,7 +4,7 @@
  * @returns
  */
 function getSearchFromGoogleUrl(url: string): string {
-  const search = /search\?q=([^&]+)/gi.exec(url)[1].split("+").join(" ");
+  const search = /search\?q=([^&]+)/gi.exec(url)[1].split('+').join(' ');
   return decodeURIComponent(search);
 }
 

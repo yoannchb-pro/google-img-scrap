@@ -23,15 +23,15 @@ const {
   GOOGLE_IMG_SCRAP,
   GOOGLE_IMG_INVERSE_ENGINE_URL,
   GOOGLE_IMG_INVERSE_ENGINE_UPLOAD,
-  GOOGLE_QUERY,
-} = require("google-img-scrap");
+  GOOGLE_QUERY
+} = require('google-img-scrap');
 // OR
 import {
   GOOGLE_IMG_SCRAP,
   GOOGLE_IMG_INVERSE_ENGINE_URL,
   GOOGLE_IMG_INVERSE_ENGINE_UPLOAD,
-  GOOGLE_QUERY,
-} from "google-img-scrap";
+  GOOGLE_QUERY
+} from 'google-img-scrap';
 ```
 
 ## Options definition
@@ -84,7 +84,7 @@ Search cats images
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
+  search: 'cats'
 });
 
 console.log(test);
@@ -98,7 +98,7 @@ The second parameter is like GOOGLE_IMG_SCRAP it include all type of options omi
 
 ```js
 const test = await GOOGLE_IMG_INVERSE_ENGINE_URL(
-  "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg",
+  'https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg',
   { limit: 5 }
 );
 
@@ -108,9 +108,9 @@ console.log(test);
 ### With a local image (cost: 3 request)
 
 ```js
-const imageBuffer = fs.readFileSync("demonSlayer.png");
+const imageBuffer = fs.readFileSync('demonSlayer.png');
 const test = await GOOGLE_IMG_INVERSE_ENGINE_UPLOAD(imageBuffer, {
-  limit: 5,
+  limit: 5
 });
 
 console.log(test);
@@ -123,12 +123,12 @@ Find all possible query options below.
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
+  search: 'cats',
   query: {
     TYPE: GOOGLE_QUERY.TYPE.CLIPART,
     LICENCE: GOOGLE_QUERY.LICENCE.COMMERCIAL_AND_OTHER,
-    EXTENSION: GOOGLE_QUERY.EXTENSION.JPG,
-  },
+    EXTENSION: GOOGLE_QUERY.EXTENSION.JPG
+  }
 });
 
 console.log(test);
@@ -138,8 +138,8 @@ console.log(test);
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  limit: 5,
+  search: 'cats',
+  limit: 5
 });
 
 console.log(test);
@@ -151,12 +151,12 @@ See axios documentation to setup the proxy
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
+  search: 'cats',
   proxy: {
-    protocol: "https",
-    host: "example.com",
-    port: 8080,
-  },
+    protocol: 'https',
+    host: 'example.com',
+    port: 8080
+  }
 });
 
 console.log(test);
@@ -168,8 +168,8 @@ Only scrap from a specific domain
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  domains: ["alamy.com", "istockphoto.com", "vecteezy.com"],
+  search: 'cats',
+  domains: ['alamy.com', 'istockphoto.com', 'vecteezy.com']
 });
 
 console.log(test);
@@ -179,8 +179,8 @@ console.log(test);
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  excludeDomains: ["istockphoto.com", "alamy.com"],
+  search: 'cats',
+  excludeDomains: ['istockphoto.com', 'alamy.com']
 });
 
 console.log(test);
@@ -192,8 +192,8 @@ If you don' like black cats and white cats
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  excludeWords: ["black", "white"], //If you don't like black cats and white cats
+  search: 'cats',
+  excludeWords: ['black', 'white'] //If you don't like black cats and white cats
 });
 
 console.log(test);
@@ -203,8 +203,8 @@ console.log(test);
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  safeSearch: false,
+  search: 'cats',
+  safeSearch: false
 });
 
 console.log(test);
@@ -214,8 +214,8 @@ console.log(test);
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
-  custom: "name=content&name2=content2",
+  search: 'cats',
+  custom: 'name=content&name2=content2'
 });
 
 console.log(test);
@@ -225,17 +225,17 @@ console.log(test);
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
-  search: "cats",
+  search: 'cats',
   //will build something like this "(draw and white) or (albino and white)"
   filterByTitles: [
-    ["draw", "white"],
-    ["albino", "white"],
+    ['draw', 'white'],
+    ['albino', 'white']
   ],
   //will build something like this "(cdn and wikipedia) or (cdn istockphoto)"
   urlMatch: [
-    ["cdn", "wikipedia"],
-    ["cdn", "istockphoto"],
-  ],
+    ['cdn', 'wikipedia'],
+    ['cdn', 'istockphoto']
+  ]
 });
 
 console.log(test);

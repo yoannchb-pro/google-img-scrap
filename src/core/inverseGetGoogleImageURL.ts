@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from "axios";
-import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
-import { unicodeToChar } from "../utils/utils";
-import FormData from "form-data";
-import { AxiosProxyConfig } from "axios";
+import axios from 'axios';
+import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
+import { unicodeToChar } from '../utils/utils';
+import FormData from 'form-data';
+import { AxiosProxyConfig } from 'axios';
 
 /**
  * Return google images url from lens.google.com inverse search image engine
@@ -21,9 +21,9 @@ async function inverseGetGoogleImageURL(
       await axios.post(url, formData, {
         headers: {
           ...GOOGLE_CONSTANT.headers,
-          ...formData.getHeaders(),
+          ...formData.getHeaders()
         },
-        ...(proxy ?? {}),
+        ...(proxy ?? {})
       })
     ).data;
     //we need to get the google lens url generated
@@ -34,16 +34,14 @@ async function inverseGetGoogleImageURL(
   const data = (
     await axios.get(url, {
       headers: GOOGLE_CONSTANT.headers,
-      ...(proxy ?? {}),
+      ...(proxy ?? {})
     })
   ).data;
 
   const urlStr = data.match(/https:\/\/www.google.com\/search\?q[^"]+/gi)[0];
 
   return (
-    unicodeToChar(urlStr) +
-    "&" +
-    Object.entries(GOOGLE_CONSTANT.forceGoogleImage).flat().join("=")
+    unicodeToChar(urlStr) + '&' + Object.entries(GOOGLE_CONSTANT.forceGoogleImage).flat().join('=')
   );
 }
 

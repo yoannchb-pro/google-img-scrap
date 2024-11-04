@@ -29,14 +29,14 @@ type GoogleQuery = {
   };
 
   EXTENSION: {
-    JPG: "jpg";
-    GIF: "gif";
-    BMP: "bmp";
-    PNG: "png";
-    SVG: "svg";
-    WEBP: "webp";
-    ICO: "ico";
-    RAW: "raw";
+    JPG: 'jpg';
+    GIF: 'gif';
+    BMP: 'bmp';
+    PNG: 'png';
+    SVG: 'svg';
+    WEBP: 'webp';
+    ICO: 'ico';
+    RAW: 'raw';
   };
 
   DATE: {

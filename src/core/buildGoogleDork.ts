@@ -1,4 +1,4 @@
-import Config from "../types/config";
+import Config from '../types/config';
 
 /**
  * Show only images with a particular title
@@ -9,14 +9,14 @@ function filterByTitlesBuilder(config: Config): string {
   const FILTER_TITLE = [];
   if (config.filterByTitles) {
     for (const titleFilter of config.filterByTitles) {
-      const value = titleFilter.map((title) => {
+      const value = titleFilter.map(title => {
         return `intitle:"${title}"`;
       });
 
-      FILTER_TITLE.push(`(${value.join(" AND ")})`);
+      FILTER_TITLE.push(`(${value.join(' AND ')})`);
     }
   }
-  return FILTER_TITLE.join(" ");
+  return FILTER_TITLE.join(' ');
 }
 
 /**
@@ -31,7 +31,7 @@ function excludeWordsBuilder(config: Config): string {
       EXCLUDE_WORDS.push(`-"${excludeWord}"`);
     }
   }
-  return EXCLUDE_WORDS.join(" ");
+  return EXCLUDE_WORDS.join(' ');
 }
 
 /**
@@ -46,7 +46,7 @@ function onlyDomainsBuilder(config: Config): string {
       DOMAINS.push(`site:"${domain}"`);
     }
   }
-  return DOMAINS.join(" OR ");
+  return DOMAINS.join(' OR ');
 }
 
 /**
@@ -61,7 +61,7 @@ function excludeDomainsBuilder(config: Config): string {
       EXCLUDE_DOMAINS.push(`-site:"${excludeDomain}"`);
     }
   }
-  return EXCLUDE_DOMAINS.join(" ");
+  return EXCLUDE_DOMAINS.join(' ');
 }
 
 /**
@@ -73,13 +73,13 @@ function urlMatchBuilder(config: Config): string {
   const URL_MATCH = [];
   if (config.urlMatch) {
     for (const urlMatch of config.urlMatch) {
-      const value = urlMatch.map((content) => {
+      const value = urlMatch.map(content => {
         return `inurl:${content}`;
       });
-      URL_MATCH.push(`(${value.join(" AND ")})`);
+      URL_MATCH.push(`(${value.join(' AND ')})`);
     }
   }
-  return URL_MATCH.join(" OR ");
+  return URL_MATCH.join(' OR ');
 }
 
 /**
@@ -94,9 +94,9 @@ function buildGoogleDorks(config: Config): string {
     excludeWordsBuilder(config),
     excludeDomainsBuilder(config),
     onlyDomainsBuilder(config),
-    filterByTitlesBuilder(config),
+    filterByTitlesBuilder(config)
   ]
-    .join(" ")
+    .join(' ')
     .trim();
 }
 

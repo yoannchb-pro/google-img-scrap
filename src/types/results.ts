@@ -1,4 +1,4 @@
-import ImageResultItem from "./imageResultItem";
+import ImageResultItem from './imageResultItem';
 
 type Results = {
   url: string;

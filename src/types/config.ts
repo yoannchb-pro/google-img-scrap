@@ -1,4 +1,4 @@
-import { AxiosProxyConfig } from "axios";
+import { AxiosProxyConfig } from 'axios';
 
 type Config = {
   search: string;

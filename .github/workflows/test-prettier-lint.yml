@@ -1,0 +1,45 @@
+name: Test, Lint and Format Code
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-lint-and-format:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Clear cache and Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: Run Build
+        run: npm run fastBuild
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Run Prettier
+        run: npm run prettier
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'WORKFLOW: Apply code formatting'
+          branch: ${{ github.head_ref }}
+          file_pattern: '.'

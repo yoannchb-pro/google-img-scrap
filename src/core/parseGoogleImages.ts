@@ -1,7 +1,7 @@
-import { unicodeToChar } from "../utils/utils";
-import GOOGLE_CONSTANT from "../constant/GOOGLE_CONSTANT";
-import axios, { AxiosProxyConfig } from "axios";
-import ImageResultItem from "../types/imageResultItem";
+import { unicodeToChar } from '../utils/utils';
+import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
+import axios, { AxiosProxyConfig } from 'axios';
+import ImageResultItem from '../types/imageResultItem';
 
 /**
  * Scrap google images scripts tag
@@ -11,7 +11,7 @@ import ImageResultItem from "../types/imageResultItem";
 async function scrapGoogleImages(url: string, proxy?: AxiosProxyConfig) {
   const { data } = await axios(url, {
     headers: GOOGLE_CONSTANT.headers,
-    ...(proxy ?? {}),
+    ...(proxy ?? {})
   });
 
   return data;
@@ -33,7 +33,7 @@ function getGoogleImageObject(
     url: unicodeToChar(informationsMatch[1]),
     originalUrl: otherInformationsMatch[2],
     height: parseInt(informationsMatch[2], 10),
-    width: parseInt(informationsMatch[3], 10),
+    width: parseInt(informationsMatch[3], 10)
   };
 }
 
@@ -53,30 +53,25 @@ async function parseGoogleImages(
   //getting image url, height, width, color average
   const informationsRegex = /\["(http[^"]+?)",(\d+),(\d+)\]/gi;
   //getting originalUrl, title, id
-  const otherInformationsRegex =
-    /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
+  const otherInformationsRegex = /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
 
   let informationsMatch: RegExpExecArray;
 
   while ((informationsMatch = informationsRegex.exec(body)) !== null) {
-    if (informationsMatch[1].startsWith("https://encrypted-tbn0.gstatic.com"))
-      continue;
+    if (informationsMatch[1].startsWith('https://encrypted-tbn0.gstatic.com')) continue;
 
     const otherInformationsMatch = otherInformationsRegex.exec(body);
 
     if (otherInformationsMatch === null) return result;
 
-    if (informationsMatch.length < 4 || otherInformationsMatch.length < 4)
-      continue;
+    if (informationsMatch.length < 4 || otherInformationsMatch.length < 4) continue;
     if (
       informationsMatch[1].match(/http/gi).length > 2 ||
       otherInformationsMatch[2].match(/http/gi).length > 2
     )
       continue;
 
-    result.push(
-      getGoogleImageObject(informationsMatch, otherInformationsMatch)
-    );
+    result.push(getGoogleImageObject(informationsMatch, otherInformationsMatch));
   }
 
   return result;

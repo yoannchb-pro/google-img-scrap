@@ -1,4 +1,4 @@
-import EXTENSIONS from "../constant/extensions/IMAGES_EXTENSIONS.json";
+import { EXTENSIONS } from '../constant/query/EXTENSIONS';
 
 /**
  * Build the query for url
@@ -14,7 +14,7 @@ function buildQuery(query: Record<string, string>) {
     result.push(`${queryName}=${encodeURIComponent(query[param])}`);
   }
 
-  return "?" + result.join("&");
+  return '?' + result.join('&');
 }
 
 /**
@@ -24,7 +24,7 @@ function buildQuery(query: Record<string, string>) {
  */
 function unicodeToChar(text: string) {
   return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
-    return String.fromCharCode(parseInt(match.replace(/\\u/g, ""), 16));
+    return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
   });
 }
 
@@ -33,8 +33,8 @@ function unicodeToChar(text: string) {
  * @param content
  * @returns
  */
-function isImage(content = "") {
-  return EXTENSIONS.some((extension) => content.includes(extension));
+function isImage(content = '') {
+  return EXTENSIONS.some(extension => content.includes(extension));
 }
 
 export { buildQuery, unicodeToChar, isImage };

@@ -1,4 +1,4 @@
-import ImageResultItem from "../types/imageResultItem";
+import ImageResultItem from '../types/imageResultItem';
 
 /**
  * Limit the result size
@@ -6,10 +6,7 @@ import ImageResultItem from "../types/imageResultItem";
  * @param imagesItems
  * @returns
  */
-function limitResultSize(
-  limit: number,
-  imagesItems: ImageResultItem[]
-): ImageResultItem[] {
+function limitResultSize(limit: number, imagesItems: ImageResultItem[]): ImageResultItem[] {
   let slicedResult: ImageResultItem[] = [];
 
   if (limit && limit > 0 && imagesItems.length > limit) {
