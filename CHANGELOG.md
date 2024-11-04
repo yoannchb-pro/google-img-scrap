@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.4
+
+- Fixed user agent to avoid bad image quality, errors and captcha (gohoski)
+
 ### 1.1.3
 
 - Some fixes
