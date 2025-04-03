@@ -14,7 +14,21 @@ describe('Rate Limiting test', function () {
     mockAxios
       .mockRejectedValueOnce({ response: { status: 429 } })
       .mockRejectedValueOnce({ response: { status: 429 } })
-      .mockResolvedValueOnce({ data: '<html>...</html>' });
+      .mockResolvedValueOnce({
+        data: `
+          <html>
+            <script>
+              var _OC_Render_ = function() {
+                return {
+                  "https://www.google.com/search?q=test+image&tbm=isch": {
+                    "data": [{"id": "1", "title": "Test Image", "url": "https://example.com/image.jpg"}]
+                  }
+                };
+              };
+            </script>
+          </html>
+        `
+      });
 
     const { result } = await GOOGLE_IMG_SCRAP({
       search: 'cats',
@@ -27,33 +41,48 @@ describe('Rate Limiting test', function () {
 
   it('Should throw error after max retries', async function () {
     // Mock sequence: 429 -> 429 -> 429 -> 429 (exceeds max retries)
-    mockAxios
-      .mockRejectedValue({ response: { status: 429 } });
+    mockAxios.mockRejectedValue({ response: { status: 429 } });
 
-    await expect(GOOGLE_IMG_SCRAP({
-      search: 'cats',
-      limit: 5
-    })).rejects.toThrow('Too many requests. Please try again later.');
+    await expect(
+      GOOGLE_IMG_SCRAP({
+        search: 'cats',
+        limit: 5
+      })
+    ).rejects.toThrow('Too many requests. Please try again later.');
   });
 
   it('Should handle non-429 errors immediately', async function () {
     // Mock 500 error (should not retry)
     mockAxios.mockRejectedValue({ response: { status: 500 } });
 
-    await expect(GOOGLE_IMG_SCRAP({
-      search: 'cats',
-      limit: 5
-    })).rejects.toThrow();
+    await expect(
+      GOOGLE_IMG_SCRAP({
+        search: 'cats',
+        limit: 5
+      })
+    ).rejects.toThrow();
     expect(mockAxios).toHaveBeenCalledTimes(1);
   });
 
   it('Should respect delay between retries', async function () {
     const startTime = Date.now();
-    
+
     // Mock sequence: 429 -> success
-    mockAxios
-      .mockRejectedValueOnce({ response: { status: 429 } })
-      .mockResolvedValueOnce({ data: '<html>...</html>' });
+    mockAxios.mockRejectedValueOnce({ response: { status: 429 } }).mockResolvedValueOnce({
+      data: `
+          <html>
+            <script>
+              var _OC_Render_ = function() {
+                return {
+                  "https://www.google.com/search?q=test+image&tbm=isch": {
+                    "data": [{"id": "1", "title": "Test Image", "url": "https://example.com/image.jpg"}]
+                  }
+                };
+              };
+            </script>
+          </html>
+        `
+    });
 
     await GOOGLE_IMG_SCRAP({
       search: 'cats',
@@ -67,4 +96,4 @@ describe('Rate Limiting test', function () {
     expect(elapsedTime).toBeGreaterThanOrEqual(1000);
     expect(mockAxios).toHaveBeenCalledTimes(2);
   });
-}); 
+});
