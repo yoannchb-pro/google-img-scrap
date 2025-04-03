@@ -162,6 +162,32 @@ const test = await GOOGLE_IMG_SCRAP({
 console.log(test);
 ```
 
+## Rate Limiting and Retry Logic
+
+The library now includes built-in rate limiting and retry logic to handle 429 (Too Many Requests) errors from Google. Here's how it works:
+
+- Automatically retries up to 3 times when encountering rate limits
+- Uses exponential backoff starting at 1 second and doubling each retry
+- Includes random jitter to prevent thundering herd problems
+- Maximum delay capped at 30 seconds between retries
+
+If all retries fail, you'll receive an error message: "Too many requests. Please try again later."
+
+To avoid hitting rate limits:
+
+- Consider implementing a proxy rotation system for high-volume scraping
+- Add delays between your own API calls
+- Use the `limit` parameter to reduce the number of results per request
+
+```js
+const test = await GOOGLE_IMG_SCRAP({
+  search: 'cats',
+  limit: 10 // Limit results to reduce request load
+});
+
+console.log(test);
+```
+
 ## Domains
 
 Only scrap from a specific domain
