@@ -1,6 +1,15 @@
 import { EXTENSIONS } from '../constant/query/EXTENSIONS';
 
 /**
+ * Sleep for a given number of milliseconds
+ * @param ms Number of milliseconds to sleep
+ * @returns Promise that resolves after the given time
+ */
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
  * Build the query for url
  * @param query
  * @returns

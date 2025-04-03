@@ -1,8 +1,7 @@
-import axios from 'axios';
+import FormData from 'form-data';
+import axios, { AxiosProxyConfig } from 'axios';
 import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
 import { unicodeToChar } from '../utils/utils';
-import FormData from 'form-data';
-import { AxiosProxyConfig } from 'axios';
 
 /**
  * Return google images url from lens.google.com inverse search image engine
