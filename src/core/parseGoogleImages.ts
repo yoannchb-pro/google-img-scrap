@@ -11,7 +11,7 @@ import ImageResultItem from '../types/imageResultItem';
 async function scrapGoogleImages(url: string, proxy?: AxiosProxyConfig) {
   const { data } = await axios(url, {
     headers: GOOGLE_CONSTANT.headers,
-    ...(proxy ?? {})
+    proxy: proxy ?? false
   });
 
   return data;

@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.1.5
+
+- Fixed proxy option
+- Removed useless
+
 ### 1.1.4
 
 - Fixed user agent to avoid bad image quality, errors and captcha (gohoski)

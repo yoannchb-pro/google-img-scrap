@@ -19,19 +19,9 @@ npm i google-img-scrap
 ## Import
 
 ```js
-const {
-  GOOGLE_IMG_SCRAP,
-  GOOGLE_IMG_INVERSE_ENGINE_URL,
-  GOOGLE_IMG_INVERSE_ENGINE_UPLOAD,
-  GOOGLE_QUERY
-} = require('google-img-scrap');
+const { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } = require('google-img-scrap');
 // OR
-import {
-  GOOGLE_IMG_SCRAP,
-  GOOGLE_IMG_INVERSE_ENGINE_URL,
-  GOOGLE_IMG_INVERSE_ENGINE_UPLOAD,
-  GOOGLE_QUERY
-} from 'google-img-scrap';
+import { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } from 'google-img-scrap';
 ```
 
 ## Options definition
@@ -85,32 +75,6 @@ Search cats images
 ```js
 const test = await GOOGLE_IMG_SCRAP({
   search: 'cats'
-});
-
-console.log(test);
-```
-
-## Reverse search engine
-
-The second parameter is like GOOGLE_IMG_SCRAP it include all type of options omitting search. (Omit<Config, "search">)
-
-### With an url (cost: 2 request)
-
-```js
-const test = await GOOGLE_IMG_INVERSE_ENGINE_URL(
-  'https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg',
-  { limit: 5 }
-);
-
-console.log(test);
-```
-
-### With a local image (cost: 3 request)
-
-```js
-const imageBuffer = fs.readFileSync('demonSlayer.png');
-const test = await GOOGLE_IMG_INVERSE_ENGINE_UPLOAD(imageBuffer, {
-  limit: 5
 });
 
 console.log(test);
