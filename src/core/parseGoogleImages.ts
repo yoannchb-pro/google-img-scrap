@@ -1,17 +1,18 @@
 import { unicodeToChar } from '../utils/utils';
 import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
-import axios, { AxiosProxyConfig } from 'axios';
+import axios from 'axios';
 import ImageResultItem from '../types/imageResultItem';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 /**
  * Scrap google images scripts tag
  * @param url
  * @returns
  */
-async function scrapGoogleImages(url: string, proxy?: AxiosProxyConfig) {
+async function scrapGoogleImages(url: string, proxy?: HttpsProxyAgent<any>) {
   const { data } = await axios(url, {
     headers: GOOGLE_CONSTANT.headers,
-    proxy: proxy ?? false
+    httpsAgent: proxy
   });
 
   return data;
@@ -44,7 +45,7 @@ function getGoogleImageObject(
  */
 async function parseGoogleImages(
   url: string,
-  proxy?: AxiosProxyConfig
+  proxy?: HttpsProxyAgent<any>
 ): Promise<ImageResultItem[]> {
   const result: ImageResultItem[] = [];
 

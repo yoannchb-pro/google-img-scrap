@@ -1,8 +1,8 @@
-import { AxiosProxyConfig } from 'axios';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 type Config = {
   search: string;
-  proxy?: AxiosProxyConfig;
+  proxy?: HttpsProxyAgent<any>;
   limit?: number;
   query?: {
     TYPE?: string;
