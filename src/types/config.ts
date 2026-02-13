@@ -1,8 +1,6 @@
-import { HttpsProxyAgent } from 'https-proxy-agent';
-
 type Config = {
   search: string;
-  proxy?: HttpsProxyAgent<any>;
+  proxy?: string;
   limit?: number;
   query?: {
     TYPE?: string;

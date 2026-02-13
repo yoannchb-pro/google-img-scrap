@@ -1,21 +1,29 @@
 import { unicodeToChar } from '../utils/utils';
 import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
-import axios from 'axios';
 import ImageResultItem from '../types/imageResultItem';
-import { HttpsProxyAgent } from 'https-proxy-agent';
+import { Impit } from 'impit';
 
 /**
  * Scrap google images scripts tag
  * @param url
  * @returns
  */
-async function scrapGoogleImages(url: string, proxy?: HttpsProxyAgent<any>) {
-  const { data } = await axios(url, {
-    headers: GOOGLE_CONSTANT.headers,
-    httpsAgent: proxy
+async function scrapGoogleImages(url: string, proxy?: string) {
+  const impit = new Impit({
+    browser: 'firefox',
+    proxyUrl: proxy,
+    ignoreTlsErrors: true,
+    followRedirects: true,
+    timeout: 30_000,
+    maxRedirects: 5,
+    headers: GOOGLE_CONSTANT.headers
   });
 
-  return data;
+  const req = await impit.fetch(url, {
+    headers: GOOGLE_CONSTANT.headers
+  });
+
+  return req.text();
 }
 
 /**
@@ -43,10 +51,7 @@ function getGoogleImageObject(
  * @param url
  * @returns
  */
-async function parseGoogleImages(
-  url: string,
-  proxy?: HttpsProxyAgent<any>
-): Promise<ImageResultItem[]> {
+async function parseGoogleImages(url: string, proxy?: string): Promise<ImageResultItem[]> {
   const result: ImageResultItem[] = [];
 
   const body: string = await scrapGoogleImages(url, proxy);
@@ -56,7 +61,7 @@ async function parseGoogleImages(
   //getting originalUrl, title, id
   const otherInformationsRegex = /\[[\w\d]+?,"([^"]+?)","(http[^"]+?)","([^"]+?)"/gi;
 
-  let informationsMatch: RegExpExecArray;
+  let informationsMatch: RegExpExecArray | null;
 
   while ((informationsMatch = informationsRegex.exec(body)) !== null) {
     if (informationsMatch[1].startsWith('https://encrypted-tbn0.gstatic.com')) continue;
@@ -67,8 +72,8 @@ async function parseGoogleImages(
 
     if (informationsMatch.length < 4 || otherInformationsMatch.length < 4) continue;
     if (
-      informationsMatch[1].match(/http/gi).length > 2 ||
-      otherInformationsMatch[2].match(/http/gi).length > 2
+      informationsMatch[1].match(/http/gi)!.length > 2 ||
+      otherInformationsMatch[2].match(/http/gi)!.length > 2
     )
       continue;
 

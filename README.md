@@ -27,7 +27,7 @@ import { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } from 'google-img-scrap';
 ## Options definition
 
 - "search" `string` what you want to search
-- "proxy" `AxiosProxyConfig` configure a proxy with axios proxy
+- "proxy" `string` configure a proxy url
 - "excludeWords" `string[]` exclude some words from the search
 - "domains" `string[]` filter by domains
 - "excludeDomains" `string[]` exclude some domains
@@ -116,11 +116,7 @@ See axios documentation to setup the proxy
 ```js
 const test = await GOOGLE_IMG_SCRAP({
   search: 'cats',
-  proxy: {
-    protocol: 'https',
-    host: 'example.com',
-    port: 8080
-  }
+  proxy: 'http://user:pass@proxy:80'
 });
 
 console.log(test);
