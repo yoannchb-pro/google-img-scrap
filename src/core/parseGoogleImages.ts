@@ -52,6 +52,7 @@ function getGoogleImageObject(
  * @returns
  */
 async function parseGoogleImages(url: string, proxy?: string): Promise<ImageResultItem[]> {
+  const processedIds = new Set<string>();
   const result: ImageResultItem[] = [];
 
   const body: string = await scrapGoogleImages(url, proxy);
@@ -77,7 +78,10 @@ async function parseGoogleImages(url: string, proxy?: string): Promise<ImageResu
     )
       continue;
 
-    result.push(getGoogleImageObject(informationsMatch, otherInformationsMatch));
+    const obj = getGoogleImageObject(informationsMatch, otherInformationsMatch);
+    if (processedIds.has(obj.id)) continue;
+    processedIds.add(obj.id);
+    result.push(obj);
   }
 
   return result;

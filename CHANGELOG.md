@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.8
+
+- Removed duplicates result
+
 ### 1.1.7
 
 - Moved from axios to impit
