@@ -11,7 +11,7 @@ describe('Url match test', function () {
       search: 'cats',
       urlMatch
     });
-
+    expect(result.length).toBeGreaterThan(0);
     for (const img of result) {
       expect(urlMatch.flat().some(word => img.url.includes(word))).toBeTruthy();
     }

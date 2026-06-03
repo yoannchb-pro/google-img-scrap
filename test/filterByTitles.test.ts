@@ -11,6 +11,7 @@ describe('Filter by titles test', function () {
       search: 'cats',
       filterByTitles
     });
+    expect(result.length).toBeGreaterThan(0);
     for (const img of result) {
       expect(filterByTitles.flat().some(word => img.title.includes(word))).toBeTruthy();
     }

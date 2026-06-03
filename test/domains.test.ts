@@ -7,6 +7,7 @@ describe('Domains test', function () {
       search: 'cats',
       domains
     });
+    expect(result.length).toBeGreaterThan(0);
     for (const img of result) {
       expect(domains.some(domain => img.url.includes(domain))).toBeTruthy();
     }

@@ -7,6 +7,7 @@ describe('Exclude words test', function () {
       search: 'cats',
       excludeWords
     });
+    expect(result.length).toBeGreaterThan(0);
     for (const img of result) {
       expect(excludeWords.some(word => img.title.includes(word))).toBeFalsy();
     }

@@ -11,6 +11,7 @@ describe('Query test', function () {
         TYPE: GOOGLE_QUERY.TYPE.DRAW
       }
     });
+    expect(result.length).toBeGreaterThan(0);
     expect(result[0].url).toMatch('png');
     expect(url).toMatch('safe=active'); //safe search
     expect(url).toMatch('test=true'); //custom query

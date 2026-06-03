@@ -7,6 +7,7 @@ describe('Exclude domains test', function () {
       search: 'cats',
       excludeDomains
     });
+    expect(result.length).toBeGreaterThan(0);
     for (const img of result) {
       expect(excludeDomains.some(domain => img.url.includes(domain))).toBeFalsy();
     }
