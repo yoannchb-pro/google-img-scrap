@@ -16,12 +16,12 @@ async function scrapGoogleImages(url: string, proxy?: string) {
     followRedirects: true,
     timeout: 30_000,
     maxRedirects: 5,
-    headers: GOOGLE_CONSTANT.headers
+    headers: {
+      ...GOOGLE_CONSTANT.headers
+    }
   });
 
-  const req = await impit.fetch(url, {
-    headers: GOOGLE_CONSTANT.headers
-  });
+  const req = await impit.fetch(url);
 
   return req.text();
 }
