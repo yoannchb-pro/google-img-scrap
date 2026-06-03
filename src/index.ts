@@ -17,7 +17,7 @@ async function GOOGLE_IMG_SCRAP(config: Config): Promise<Results> {
   verifyGoogleQuery(config);
 
   const URL = constructGoogleUrl(config);
-  const result = await parseGoogleImages(URL, config?.proxy);
+  const result = await parseGoogleImages(config);
   const slicedResult = limitResultSize(config?.limit, result);
 
   return {

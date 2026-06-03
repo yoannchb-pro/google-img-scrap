@@ -1,7 +1,7 @@
 import { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } from '../dist';
 
 describe('Query test', function () {
-  it('Test query params like safeSearch, custom query and query object', async function () {
+  it('Test query params like safeSearch, custom query and query png', async function () {
     const { url, result } = await GOOGLE_IMG_SCRAP({
       search: 'cats',
       safeSearch: true,
