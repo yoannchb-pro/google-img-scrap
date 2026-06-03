@@ -14,7 +14,9 @@ function constructGoogleUrl(config: Config): string {
   const SAFE_SEARCH = config.safeSearch ? `&safe=active` : '';
 
   const QUERY = Object.assign(GOOGLE_CONSTANT.forceGoogleImage, {
-    [GOOGLE_CONSTANT.queryParam]: Object.values(config.query || {}).join(','),
+    ...(config.query && {
+      [GOOGLE_CONSTANT.queryParam]: Object.values(config.query).join(',')
+    }),
     q: GOOGLE_DORK
   });
 
