@@ -13,10 +13,10 @@ function filterByTitlesBuilder(config: Config): string {
         return `intitle:"${title}"`;
       });
 
-      FILTER_TITLE.push(`(${value.join(' AND ')})`);
+      FILTER_TITLE.push(`(${value.join(' OR ')})`);
     }
   }
-  return FILTER_TITLE.join(' ');
+  return FILTER_TITLE.join(' AND ');
 }
 
 /**
@@ -76,10 +76,10 @@ function urlMatchBuilder(config: Config): string {
       const value = urlMatch.map(content => {
         return `inurl:${content}`;
       });
-      URL_MATCH.push(`(${value.join(' AND ')})`);
+      URL_MATCH.push(`(${value.join(' OR ')})`);
     }
   }
-  return URL_MATCH.join(' OR ');
+  return URL_MATCH.join(' AND ');
 }
 
 /**

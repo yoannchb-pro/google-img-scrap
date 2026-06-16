@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.2.0
+
+- Since the last update of google we need to get the cookies from google. This is why we use `puppeteer-real-browser` in this new version to retrieve the cookie and save them in cache for faster requests after this.
+- Structure of `filterByTitles` and `urlMatch` have changed.
+
 ### 1.1.8
 
 - Removed duplicates result

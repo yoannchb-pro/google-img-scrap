@@ -2,6 +2,7 @@ import { unicodeToChar } from '../utils/utils';
 import GOOGLE_CONSTANT from '../constant/GOOGLE_CONSTANT';
 import ImageResultItem from '../types/imageResultItem';
 import { Impit } from 'impit';
+import { clearCacheCookies, getCookies } from './cookies';
 
 /**
  * Scrap google images scripts tag
@@ -9,15 +10,17 @@ import { Impit } from 'impit';
  * @returns
  */
 async function scrapGoogleImages(url: string, proxy?: string) {
+  const cookies = await getCookies(proxy || '');
   const impit = new Impit({
-    browser: 'firefox',
+    browser: 'chrome',
     proxyUrl: proxy,
     ignoreTlsErrors: true,
     followRedirects: true,
     timeout: 30_000,
     maxRedirects: 5,
     headers: {
-      ...GOOGLE_CONSTANT.headers
+      ...GOOGLE_CONSTANT.headers,
+      cookie: cookies
     }
   });
 
@@ -51,7 +54,11 @@ function getGoogleImageObject(
  * @param url
  * @returns
  */
-async function parseGoogleImages(url: string, proxy?: string): Promise<ImageResultItem[]> {
+async function parseGoogleImages(
+  url: string,
+  proxy?: string,
+  resetCookies = true
+): Promise<ImageResultItem[]> {
   const processedIds = new Set<string>();
   const result: ImageResultItem[] = [];
 
@@ -82,6 +89,12 @@ async function parseGoogleImages(url: string, proxy?: string): Promise<ImageResu
     if (processedIds.has(obj.id)) continue;
     processedIds.add(obj.id);
     result.push(obj);
+  }
+
+  // If we don't get any results, it might be due to invalid cookies. Clear the cache and try again.
+  if (result.length === 0 && resetCookies) {
+    clearCacheCookies();
+    return await parseGoogleImages(url, proxy, false);
   }
 
   return result;

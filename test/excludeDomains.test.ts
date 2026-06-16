@@ -2,9 +2,9 @@ import { GOOGLE_IMG_SCRAP } from '../dist';
 
 describe('Exclude domains test', function () {
   it("All result shouldn't includes those domains", async function () {
-    const excludeDomains = ['https://fr.wikipedia.org/', 'https://wall.alphacoders.com/'];
+    const excludeDomains = ['wikipedia.org', 'lphacoders.com'];
     const { result } = await GOOGLE_IMG_SCRAP({
-      search: 'cats',
+      search: 'cats wikipeedia',
       excludeDomains
     });
     expect(result.length).toBeGreaterThan(0);
