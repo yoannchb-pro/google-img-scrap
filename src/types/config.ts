@@ -10,13 +10,13 @@ type Config = {
     LICENCE?: string;
     EXTENSION?: string;
   };
-  urlMatch?: string[][];
+  urlMatch?: string[];
   domains?: string[];
   excludeWords?: string[];
   custom?: string;
   safeSearch?: boolean;
   excludeDomains?: string[];
-  filterByTitles?: string[][];
+  filterByTitles?: string[];
 };
 
 export default Config;
