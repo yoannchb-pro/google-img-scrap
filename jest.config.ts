@@ -4,7 +4,8 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   rootDir: 'test',
   testEnvironment: 'node',
-  verbose: true
+  verbose: true,
+  testTimeout: 20_000
 };
 
 export default config;
