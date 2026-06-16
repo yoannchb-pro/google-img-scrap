@@ -10,7 +10,7 @@
     "fastBuild": "tsc",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write .",
-    "test": "jest --colors"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "files": [
     "dist",

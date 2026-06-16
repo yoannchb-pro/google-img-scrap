@@ -6,17 +6,13 @@ import Config from '../types/config';
  * @returns
  */
 function filterByTitlesBuilder(config: Config): string {
-  const FILTER_TITLE = [];
+  const FILTER_TITLE: string[] = [];
   if (config.filterByTitles) {
     for (const titleFilter of config.filterByTitles) {
-      const value = titleFilter.map(title => {
-        return `intitle:"${title}"`;
-      });
-
-      FILTER_TITLE.push(`(${value.join(' OR ')})`);
+      FILTER_TITLE.push(`(allintitle:"${titleFilter.join(' ')}")`);
     }
   }
-  return FILTER_TITLE.join(' AND ');
+  return FILTER_TITLE.join(' OR ');
 }
 
 /**
@@ -70,16 +66,13 @@ function excludeDomainsBuilder(config: Config): string {
  * @returns
  */
 function urlMatchBuilder(config: Config): string {
-  const URL_MATCH = [];
+  const URL_MATCH: string[] = [];
   if (config.urlMatch) {
     for (const urlMatch of config.urlMatch) {
-      const value = urlMatch.map(content => {
-        return `inurl:${content}`;
-      });
-      URL_MATCH.push(`(${value.join(' OR ')})`);
+      URL_MATCH.push(`(allinurl:"${urlMatch.join(' ')}")`);
     }
   }
-  return URL_MATCH.join(' AND ');
+  return URL_MATCH.join(' OR ');
 }
 
 /**

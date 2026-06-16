@@ -186,12 +186,12 @@ console.log(test);
 ```js
 const test = await GOOGLE_IMG_SCRAP({
   search: 'cats',
-  //will build something like this "(draw or white) and (albino or white)"
+  //will build something like this "(draw and white) or (albino and white)"
   filterByTitles: [
     ['draw', 'white'],
     ['albino', 'white']
   ],
-  //will build something like this "(cdn or wikipedia) and (cdn or istockphoto)"
+  //will build something like this "(cdn and wikipedia) or (cdn and istockphoto)"
   urlMatch: [
     ['cdn', 'wikipedia'],
     ['cdn', 'istockphoto']
