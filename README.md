@@ -33,8 +33,8 @@ import { GOOGLE_IMG_SCRAP, GOOGLE_QUERY } from 'google-img-scrap';
 - "excludeDomains" `string[]` exclude some domains
 - "safeSearch" `boolean` active safe search or not for nsfw for example
 - "custom" `string` add extra query
-- "urlMatch" `string[][]` get image when an url match a string (example: "cdn") | `example below`
-- "filterByTitles" `string[][]` filter images by titles | `example below`
+- "urlMatch" `string[]` get image when an url match a string (example: "cdn")
+- "filterByTitles" `string[]` filter images by titles
 - "query" `GoogleQuery` set a query (can be [TYPE, DATE, COLOR, SIZE, LICENCE, EXTENSION]) (use GOOGLE_QUERY items | `example below`
 - "limit" `number` to limit the size of the results
 
@@ -111,8 +111,6 @@ console.log(test);
 
 ## Proxy
 
-See axios documentation to setup the proxy
-
 ```js
 const test = await GOOGLE_IMG_SCRAP({
   search: 'cats',
@@ -164,7 +162,7 @@ console.log(test);
 ```js
 const test = await GOOGLE_IMG_SCRAP({
   search: 'cats',
-  safeSearch: false
+  safeSearch: true
 });
 
 console.log(test);
@@ -181,7 +179,7 @@ const test = await GOOGLE_IMG_SCRAP({
 console.log(test);
 ```
 
-## How urlMatch and filterByTitles work ?
+## urlMatch and filterByTitles 
 
 ```js
 const test = await GOOGLE_IMG_SCRAP({
