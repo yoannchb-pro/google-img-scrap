@@ -73,7 +73,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "impit": "^0.14.1",
+    "impit": "^0.14.3",
     "puppeteer-real-browser": "^1.4.4"
   }
 }
