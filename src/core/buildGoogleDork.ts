@@ -81,6 +81,7 @@ function buildGoogleDorks(config: Config): string {
     onlyDomainsBuilder(config),
     filterByTitlesBuilder(config)
   ]
+    .filter(Boolean)
     .join(' ')
     .trim();
 }
